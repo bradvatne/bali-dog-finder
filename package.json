@@ -1,0 +1,25 @@
+{
+  "name": "bali-dog-finder",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "leaflet": "^1.7.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.13",
+    "next": "10.0.5",
+    "next-auth": "^3.1.0",
+    "react": "17.0.1",
+    "react-bootstrap": "^1.4.3",
+    "react-dom": "17.0.1",
+    "react-leaflet": "^3.0.5"
+  },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.3"
+  }
+}
