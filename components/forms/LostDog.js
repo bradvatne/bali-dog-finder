@@ -1,6 +1,15 @@
 import { Form, Modal, Button } from "react-bootstrap";
+import { useState } from "react";
+import UploadImage from "../../components/UploadImage";
 
 export default function LostDog({ onHide }) {
+  const [location, setLocation] = useState();
+
+  function getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLocation([position.coords.latitude, position.coords.longitude]);
+    });
+  }
   return (
     <>
       <Modal.Header closeButton>
@@ -22,21 +31,31 @@ export default function LostDog({ onHide }) {
               placeholder="Describe your lost dog and it's location"
             />
             <div className="d-flex flex-row mt-2">
-              <Button variant="primary" className="mr-2">Use Current Location</Button>
-              <Button variant="primary">Select Location</Button>
+              <Button
+                variant="primary"
+                className="mr-2"
+                onClick={() => getCurrentLocation()}
+              >
+                Use Current Location
+              </Button>
+              <Button variant="primary">Select Location on Map</Button>
+              <input
+                type="hidden"
+                id="location"
+                name="location"
+                value={location}
+              />
             </div>
           </Form.Group>
+          <UploadImage />
         </Form>
-
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
       </Modal.Body>
+
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
+        <Button onClick={onHide}>Submit</Button>
+        <Button variant="danger" onClick={onHide}>
+          Cancel
+        </Button>
       </Modal.Footer>
     </>
   );

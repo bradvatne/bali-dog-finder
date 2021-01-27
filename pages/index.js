@@ -16,13 +16,12 @@ export default function Home(data) {
   const [session, loading] = useSession();
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({show: false, modalContent: ''});
-  //Function passed to DogForm to handle closing the window by setting modal state to false
-  const closeModal = () => setShowModal({show: false});
-  //Modal Content
+
   //Disable Leaflet SSR
   console.log(session)
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
-    ssr: false,
+    ssr: false
+
   });
 
   return (
@@ -46,7 +45,8 @@ export default function Home(data) {
         {(modalShow.modalContent == 'signin') && <LostDog onHide={() => setModalShow({show: false})}/>}
         </ModalContainer>
       <div className="leaflet-container">
-        <LeafletMap />
+        <LeafletMap >
+          </LeafletMap>
       </div>
     </>
   );

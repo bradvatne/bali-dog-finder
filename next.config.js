@@ -6,5 +6,8 @@ module.exports = {
     GOOGLE_OAUTH:
       "727446374586-3h6ugbtctkhunfh0t773aj3mig2f8sbg.apps.googleusercontent.com",
     GOOGLE_OAUTH_SECRET: "n2QcZQC_XjVPKr_3VabDj7ca",
+    CLOUDINARY_URL: "cloudinary://982427895672898:CIw0FhDwX_Rm24zWUjm4APIrQdY@ddkclruno",
+    CLOUDINARY_SECRET: "CIw0FhDwX_Rm24zWUjm4APIrQdY",
+    CLOUDINARY_API: "982427895672898"
   },
 };

@@ -17,7 +17,9 @@
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "17.0.1",
-    "react-leaflet": "^3.0.5"
+    "react-images-upload": "^1.2.8",
+    "react-leaflet": "^3.0.5",
+    "react-leaflet-location-picker": "^1.4.2"
   },
   "peerOptionalDependencies": {
     "mongodb": "^3.6.3"
