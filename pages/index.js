@@ -35,7 +35,7 @@ export default function Home(data) {
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data} />
+        <LeafletMap data={data.data} />
       </div>
     </>
   );
@@ -46,8 +46,15 @@ export async function getServerSideProps(context) {
   //Connects to database
   dbConnect();
 
+
+  let data;
   //Query Database for all markers
-  let data = await MarkerData.find({});
+  try {
+    data = await MarkerData.find({});
+  } catch(err) {
+    console.log('error')
+  }
+  
 
   //Little trick to convert non-serializable fields (like objectID) into JSON (throws error otherwise)
   data = JSON.parse(JSON.stringify(data));
