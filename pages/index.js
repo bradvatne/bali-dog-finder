@@ -1,13 +1,11 @@
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { signIn, signOut, useSession } from "next-auth/client";
-import dbConnect from "../utils/dbConnect";
-import MarkerData from "../models/Marker";
 import dynamic from "next/dynamic";
 
 import Header from "../components/Header";
 
-export default function Home(data) {
+export default function Home() {
   //Next Auth Session, passed to Form
   const [session, loading] = useSession();
   //Function to handle DogForm modal
@@ -35,33 +33,8 @@ export default function Home(data) {
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data.data} />
+        <LeafletMap />
       </div>
     </>
   );
-}
-
-//Get map markers from DB
-export async function getServerSideProps(context) {
-  //Connects to database
-  dbConnect();
-
-
-  let data;
-  //Query Database for all markers
-  try {
-    data = await MarkerData.find({});
-  } catch(err) {
-    console.log('error')
-  }
-  
-
-  //Little trick to convert non-serializable fields (like objectID) into JSON (throws error otherwise)
-  data = JSON.parse(JSON.stringify(data));
-
-  return {
-    props: {
-      data,
-    },
-  };
 }
