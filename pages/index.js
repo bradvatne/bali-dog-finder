@@ -12,7 +12,6 @@ export default function Home() {
   const [modalShow, setModalShow] = useState({ show: false, modalContent: "" });
 
   //Disable Leaflet SSR
-  console.log(session);
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
     ssr: false,
   });
