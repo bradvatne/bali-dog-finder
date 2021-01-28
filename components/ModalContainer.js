@@ -1,6 +1,7 @@
 import {Modal, Button} from 'react-bootstrap'
 
 export default function ModalContainer(props) {
+  return <></>;
     return (
       <Modal
         {...props}
@@ -8,7 +9,7 @@ export default function ModalContainer(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        {props.children}
+
       </Modal>
     );
   }

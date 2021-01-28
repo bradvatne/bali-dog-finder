@@ -1,27 +1,14 @@
 import { Form, Modal, Button } from "react-bootstrap";
 
-export default function LostDog({onHide}) {
+export default function FoundDog({onHide}) {
   return (
     <>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add Your Found Dog's Information
+          Found Dog
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
-          <Form.Group controlId="formGroupEmail">
-            <Form.Label>Dog's Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter dog's name" />
-          </Form.Group>
-          <Form.Group controlId="formGroupPassword">
-            <Form.Label>Description of Dog</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Describe your lost dog and it's location"
-            />
-          </Form.Group>
-        </Form>
         <h4>Centered Modal</h4>
         <p>
           Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
@@ -35,3 +22,4 @@ export default function LostDog({onHide}) {
       </>
   );
 }
+

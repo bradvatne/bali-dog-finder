@@ -1,11 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-export default function LeafletMap({data}) {
+export default function LeafletMap({ data }) {
+  console.log(data.length, "did we get the data?");
   return (
     <MapContainer
       center={[-8.508835484426955, 115.25187644698303]}
       zoom={13}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

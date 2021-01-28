@@ -1,13 +1,84 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import UploadImage from "../../components/UploadImage";
+import axios from "axios";
 
-export default function LostDog({ onHide }) {
-  const [location, setLocation] = useState();
+export default function LostDog({ onHide, session }) {
+  const [location, setLocation] = useState([]);
+  const [dogName, setDogName] = useState("");
+  const [description, setDescription] = useState("");
+  const [files, setFiles] = useState([]);
+  const [imageurl, setImageUrl] = useState("");
+  const [uploadComplete, setUploadComplete] = useState(false);
+  const [locationComplete, setLocationComplete] = useState(false);
+  const onDrop = (acceptedFiles) => {
+    setFiles(
+      acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      )
+    );
+  };
+  const upload = () => {
+    const uploadURL = "	https://api.cloudinary.com/v1_1/ddkclruno/image/upload";
+    const uploadPreset = "okzkpnl4";
+
+    files.forEach((file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+      axios({
+        url: uploadURL,
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        data: formData,
+      })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data.url, 'HEREEEEEEEEE')
+          setImageUrl(res.data.url.toString());
+          setUploadComplete(true);
+        })
+        .catch((err) => console.log(err));
+    });
+  };
+
+  async function addDog(e) {
+    e.preventDefault();
+    console.log(dogName, description, location, imageurl, session.id);
+    try {
+      const res = await fetch("./api/markers", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          dogname: dogName,
+          description: description,
+          lat: location[0],
+          long: location[1],
+          imageurl: imageurl,
+          user: session.id,
+        }),
+      });
+      if (res.status === 201) {
+        alert("Your dog has been added!");
+        onHide();
+      } else {
+        alert("Sorry, something went wrong.");
+      }
+    } catch (err) {
+      alert("Sorry, something went wrong.");
+    }
+  }
 
   function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLocation([position.coords.latitude, position.coords.longitude]);
+      setLocationComplete(true);
     });
   }
   return (
@@ -21,7 +92,11 @@ export default function LostDog({ onHide }) {
         <Form>
           <Form.Group controlId="formGroupEmail">
             <Form.Label>Dog's Name:</Form.Label>
-            <Form.Control type="text" placeholder="Enter dog's name" />
+            <Form.Control
+              type="text"
+              placeholder="Enter dog's name"
+              onChange={(e) => setDogName(e.target.value)}
+            />
           </Form.Group>
           <Form.Group controlId="formGroupPassword">
             <Form.Label>Description of Dog:</Form.Label>
@@ -29,34 +104,61 @@ export default function LostDog({ onHide }) {
               as="textarea"
               rows={4}
               placeholder="Describe your lost dog and it's location"
+              onChange={(e) => setDescription(e.target.value)}
             />
-            <div className="d-flex flex-row mt-2">
-              <Button
-                variant="primary"
-                className="mr-2"
-                onClick={() => getCurrentLocation()}
-              >
-                Use Current Location
-              </Button>
-              <Button variant="primary">Select Location on Map</Button>
-              <input
-                type="hidden"
-                id="location"
-                name="location"
-                value={location}
-              />
-            </div>
+            {!uploadComplete && (
+              <div className="mt-3">
+                <Form.Label>Upload Images:</Form.Label>
+                <UploadImage files={files} onDrop={onDrop} />
+                <Button variant="dark" onClick={() => upload()}>
+                  Upload
+                </Button>
+              </div>
+            )}
+            {uploadComplete && (
+              <div className="mt-3">
+                <Form.Label>
+                  Your image has been successfuly uploaded
+                </Form.Label>
+              </div>
+            )}
+            {!locationComplete && (<>
+              <div className="mt-3">
+                <Form.Label>Input Location:</Form.Label>
+              </div>
+                          <div className="d-flex flex-row mt-2">
+                          <Button
+                            variant="dark"
+                            className="mr-2"
+                            onClick={() => getCurrentLocation()}
+                          >
+                            Use Current Location
+                          </Button>
+                          <Button variant="dark">Select Location on Map</Button>
+                        </div>
+                        </>
+            )}
+            {locationComplete && (
+              <div className="mt-3">
+                <p>Geographic Coordinates selected:</p>
+                <p>Latitude - {location[0]}</p>
+                <p>Longitude - {location[1]}</p>
+              </div>
+            )}
+
+
           </Form.Group>
-          <UploadImage />
+
+          <Modal.Footer>
+            <Button onClick={addDog} type="submit">
+              Submit
+            </Button>
+            <Button variant="danger" onClick={onHide}>
+              Cancel
+            </Button>
+          </Modal.Footer>
         </Form>
       </Modal.Body>
-
-      <Modal.Footer>
-        <Button onClick={onHide}>Submit</Button>
-        <Button variant="danger" onClick={onHide}>
-          Cancel
-        </Button>
-      </Modal.Footer>
     </>
   );
 }
