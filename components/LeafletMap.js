@@ -1,5 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
+import Image from "next/image";
 
 export default function LeafletMap({ data }) {
   const [markerData, setMarkerData] = useState([
@@ -28,8 +30,16 @@ export default function LeafletMap({ data }) {
       {markerData.map((marker, index) => (
         <Marker key={index} position={[marker.lat, marker.long]}>
           <Popup>
-            {marker.dogname}
-            <br />
+            <Card style={{ width: "18rem", border: "none" }}>
+              {marker.imageurl && <Card.Img variant='top' src={marker.imageurl}/>}
+              <Card.Body>
+                <Card.Title>{marker.dogname}</Card.Title>
+                <Card.Text>
+                  {marker.description}
+                </Card.Text>
+                <Button variant="primary" className="w-100">Contact Owner</Button>
+              </Card.Body>
+            </Card>
           </Popup>
         </Marker>
       ))}

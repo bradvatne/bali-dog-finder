@@ -10,6 +10,7 @@ import Header from "../components/Header";
 export default function Home(data) {
   //Next Auth Session, passed to Form
   const [session, loading] = useSession();
+  const [center, setCenter] = useState({ lat: -1, long: 1 });
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({ show: false, modalContent: "" });
 
@@ -46,15 +47,13 @@ export async function getServerSideProps(context) {
   //Connects to database
   dbConnect();
 
-
   let data;
   //Query Database for all markers
   try {
     data = await MarkerData.find({});
-  } catch(err) {
-    console.log('error')
+  } catch (err) {
+    console.log("error");
   }
-  
 
   //Little trick to convert non-serializable fields (like objectID) into JSON (throws error otherwise)
   data = JSON.parse(JSON.stringify(data));
