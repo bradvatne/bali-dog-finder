@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "leaflet": "^1.7.1",
     "mongodb": "^3.6.3",
@@ -20,7 +19,8 @@
     "react-dom": "17.0.1",
     "react-dropzone": "^11.2.4",
     "react-leaflet": "^3.0.5",
-    "react-leaflet-location-picker": "^1.4.2"
+    "react-leaflet-location-picker": "^1.4.2",
+    "swr": "^0.4.0"
   },
   "peerOptionalDependencies": {
     "mongodb": "^3.6.3"

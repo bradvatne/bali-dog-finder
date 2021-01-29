@@ -1,31 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import useSwr from "swr";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function LeafletMap() {
-  console.log("hello world");
-  let data = [];
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    axios
-      .get("http://localhost:3000/api/markers", {
-        cancelToken: source.token,
-      })
-      .then((res) => {
-        console.log(data, 'data first')
-        data = (res.data.data);
-        console.log(data, 'data second')
-      })
-      .catch((err) => axios.isCancel(err));
-
-    return () => {
-      source.cancel();
-    };
-  }, []);
-
-  console.log(data, 'data third')
-
-
+  const url = "http://localhost:3000/api/markers";
+  const { data } = useSwr(url, { fetcher });
+  let markerData = await data.data
   return (
     <MapContainer
       center={[-8.508835484426955, 115.25187644698303]}
@@ -37,21 +18,16 @@ export default function LeafletMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {data.map((marker, index) => (
-        <Marker
-          key={index}
-          position={[Number(marker.lat), Number(marker.long)]}
-        >
-          <Popup>
-            {marker.dogname}
-            <br />
-          </Popup>
-        </Marker>
-      ))}
     </MapContainer>
   );
 }
 
 /*
-
+      {markerData.map((marker, index) => (
+        <Marker
+          key={index}
+          position={(marker.lat), Number(marker.long)}
+        >
+        </Marker>
+      ))}
 */
