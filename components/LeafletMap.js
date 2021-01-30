@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import Image from "next/image";
 
-export default function LeafletMap({ data }) {
+export default function LeafletMap({ data, center }) {
   const [markerData, setMarkerData] = useState([
     {
       lat: -8.508835484426955,
@@ -19,8 +19,8 @@ export default function LeafletMap({ data }) {
   console.log("markerdata", markerData);
   return (
     <MapContainer
-      center={[-8.508835484426955, 115.25187644698303]}
-      zoom={13}
+      center={[center.lat, center.long]}
+      zoom={12}
       scrollWheelZoom={true}
     >
       <TileLayer

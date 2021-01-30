@@ -2,6 +2,7 @@ import { Form, Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import UploadImage from "../../components/UploadImage";
 import axios from "axios";
+import PhoneInput from "react-phone-number-input";
 
 export default function LostDog({ onHide, session }) {
   const [location, setLocation] = useState([]);
@@ -11,6 +12,7 @@ export default function LostDog({ onHide, session }) {
   const [imageurl, setImageUrl] = useState("");
   const [uploadComplete, setUploadComplete] = useState(false);
   const [locationComplete, setLocationComplete] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState();
   const onDrop = (acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file) =>
@@ -38,7 +40,7 @@ export default function LostDog({ onHide, session }) {
       })
         .then((res) => {
           console.log(res);
-          console.log(res.data.url, 'HEREEEEEEEEE')
+          console.log(res.data.url, "HEREEEEEEEEE");
           setImageUrl(res.data.url.toString());
           setUploadComplete(true);
         })
@@ -122,32 +124,41 @@ export default function LostDog({ onHide, session }) {
                 </Form.Label>
               </div>
             )}
-            {!locationComplete && (<>
+          </Form.Group>
+          <Form.Group>
+            <div className="d-flex flex-row">
+            <PhoneInput
+              international
+              defaultCountry="ID"
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
+            </div>
+          </Form.Group>
+          {!locationComplete && (
+            <>
               <div className="mt-3">
                 <Form.Label>Input Location:</Form.Label>
               </div>
-                          <div className="d-flex flex-row mt-2">
-                          <Button
-                            variant="dark"
-                            className="mr-2"
-                            onClick={() => getCurrentLocation()}
-                          >
-                            Use Current Location
-                          </Button>
-                          <Button variant="dark">Select Location on Map</Button>
-                        </div>
-                        </>
-            )}
-            {locationComplete && (
-              <div className="mt-3">
-                <p>Geographic Coordinates selected:</p>
-                <p>Latitude - {location[0]}</p>
-                <p>Longitude - {location[1]}</p>
+              <div className="d-flex flex-row mt-2">
+                <Button
+                  variant="dark"
+                  className="mr-2"
+                  onClick={() => getCurrentLocation()}
+                >
+                  Use Current Location
+                </Button>
+                <Button variant="dark">Select Location on Map</Button>
               </div>
-            )}
-
-
-          </Form.Group>
+            </>
+          )}
+          {locationComplete && (
+            <div className="mt-3">
+              <p>Geographic Coordinates selected:</p>
+              <p>Latitude - {location[0]}</p>
+              <p>Longitude - {location[1]}</p>
+            </div>
+          )}
 
           <Modal.Footer>
             <Button onClick={addDog} type="submit">

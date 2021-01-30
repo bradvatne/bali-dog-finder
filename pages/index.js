@@ -10,7 +10,7 @@ import Header from "../components/Header";
 export default function Home(data) {
   //Next Auth Session, passed to Form
   const [session, loading] = useSession();
-  const [center, setCenter] = useState({ lat: -1, long: 1 });
+  const [center, setCenter] = useState({ lat: -8.6, long: 115.2126 });
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({ show: false, modalContent: "" });
 
@@ -36,7 +36,7 @@ export default function Home(data) {
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data.data} />
+        <LeafletMap data={data.data} center={center} />
       </div>
     </>
   );
