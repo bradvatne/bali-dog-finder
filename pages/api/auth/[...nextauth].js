@@ -16,7 +16,6 @@ const options = {
       return Promise.resolve(session);
     },
   },
-  debug: true,
 };
 
 export default (req, res) => {

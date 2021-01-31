@@ -1,33 +1,38 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import { Card, Button } from "react-bootstrap";
-import Image from "next/image";
 
-export default function LeafletMap({ data, center }) {
-  const [markerData, setMarkerData] = useState([
-    {
-      lat: -8.508835484426955,
-      long: 115.25187644698303,
-      dogname: "buddy",
-    },
-  ]);
-  console.log("first", data);
-  useEffect(() => {
-    setMarkerData(data);
-  }, []);
+//data = array of objects = marker data (dogs) from mongodb, gathered from getserversideprops in index.js
+//center = array[num] = map center position, state value from index.js for selecting specific locations in nav
+//selectingLocation = boolean = state value triggered by dog forms, recieved from index.js
+export default function LeafletMap({ data, center, selectingLocation, setSelectingLocation, setModalShow}) {
+  //gets lat long values from user click
+  function SelectLocation() {
+    const map = useMapEvents({
+      click(e) {
+        console.log(e.latlng)
+        setSelectingLocation(false);
+        localStorage.setItem('lat', e.latlng.lat);
+        localStorage.setItem('long', e.latlng.lng);
+        setModalShow({ show: true, modalContent: localStorage.getItem('modaltype')})
+        console.log(localStorage)
+      },
+    })
+    return null;
+  }
 
-  console.log("markerdata", markerData);
   return (
     <MapContainer
       center={[center.lat, center.long]}
       zoom={12}
       scrollWheelZoom={true}
+      className={selectingLocation ? 'crosshair-cursor' : ''}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markerData.map((marker, index) => (
+      {selectingLocation && <SelectLocation/>}
+      {data.map((marker, index) => (
         <Marker key={index} position={[marker.lat, marker.long]}>
           <Popup>
             <Card style={{ width: "18rem", border: "none" }}>

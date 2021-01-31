@@ -14,8 +14,10 @@ export default function Home(data) {
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({ show: false, modalContent: "" });
 
+  //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
+  const [selectingLocation, setSelectingLocation] = useState(false)
+
   //Disable Leaflet SSR
-  console.log(session);
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
     ssr: false,
   });
@@ -33,10 +35,12 @@ export default function Home(data) {
         signOut={signOut}
         session={session}
         setModalShow={setModalShow}
+        modalShow={modalShow}
+        setSelectingLocation={setSelectingLocation}
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data.data} center={center} />
+        <LeafletMap data={data.data} center={center} selectingLocation={selectingLocation} setSelectingLocation={setSelectingLocation} setModalShow={setModalShow}/>
       </div>
     </>
   );

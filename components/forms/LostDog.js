@@ -1,18 +1,30 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useState} from "react";
 import UploadImage from "../../components/UploadImage";
 import axios from "axios";
-import PhoneInput from "react-phone-number-input";
 
-export default function LostDog({ onHide, session }) {
-  const [location, setLocation] = useState([]);
-  const [dogName, setDogName] = useState("");
-  const [description, setDescription] = useState("");
+export default function LostDog({ onHide, session, setSelectingLocation }) {
+  //Form Input State
+  const [location, setLocation] = useState([localStorage.getItem('lat'),localStorage.getItem('long')]);
+  const [dogName, setDogName] = useState(localStorage.getItem('dogname'));
+  const [description, setDescription] = useState(localStorage.getItem('description'));
+  const [imageurl, setImageUrl] = useState(localStorage.getItem('imageurl'));
   const [files, setFiles] = useState([]);
-  const [imageurl, setImageUrl] = useState("");
   const [uploadComplete, setUploadComplete] = useState(false);
   const [locationComplete, setLocationComplete] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState();
+  //Closes modal, saves state to local storage, changes selectLocation to true
+  const handleSelectLocation = () => {
+    onHide();
+    setSelectingLocation(true);
+    localStorage.setItem('modaltype', 'lostdog')
+    localStorage.setItem('dogname', dogName);
+    localStorage.setItem('description', description);
+    localStorage.setItem('imageurl', imageurl);
+  }
+
+
+  
+  //Image Upload DropZone
   const onDrop = (acceptedFiles) => {
     setFiles(
       acceptedFiles.map((file) =>
@@ -22,6 +34,7 @@ export default function LostDog({ onHide, session }) {
       )
     );
   };
+  //Image Upload Logic
   const upload = () => {
     const uploadURL = "	https://api.cloudinary.com/v1_1/ddkclruno/image/upload";
     const uploadPreset = "okzkpnl4";
@@ -39,8 +52,6 @@ export default function LostDog({ onHide, session }) {
         data: formData,
       })
         .then((res) => {
-          console.log(res);
-          console.log(res.data.url, "HEREEEEEEEEE");
           setImageUrl(res.data.url.toString());
           setUploadComplete(true);
         })
@@ -48,6 +59,7 @@ export default function LostDog({ onHide, session }) {
     });
   };
 
+  //Form Submit API Logic
   async function addDog(e) {
     e.preventDefault();
     console.log(dogName, description, location, imageurl, session.id);
@@ -98,6 +110,7 @@ export default function LostDog({ onHide, session }) {
               type="text"
               placeholder="Enter dog's name"
               onChange={(e) => setDogName(e.target.value)}
+              value={dogName}
             />
           </Form.Group>
           <Form.Group controlId="formGroupPassword">
@@ -107,6 +120,7 @@ export default function LostDog({ onHide, session }) {
               rows={4}
               placeholder="Describe your lost dog and it's location"
               onChange={(e) => setDescription(e.target.value)}
+              value={description}
             />
             {!uploadComplete && (
               <div className="mt-3">
@@ -125,16 +139,6 @@ export default function LostDog({ onHide, session }) {
               </div>
             )}
           </Form.Group>
-          <Form.Group>
-            <div className="d-flex flex-row">
-            <PhoneInput
-              international
-              defaultCountry="ID"
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-            />
-            </div>
-          </Form.Group>
           {!locationComplete && (
             <>
               <div className="mt-3">
@@ -148,7 +152,7 @@ export default function LostDog({ onHide, session }) {
                 >
                   Use Current Location
                 </Button>
-                <Button variant="dark">Select Location on Map</Button>
+                <Button variant="dark" onClick={()=> handleSelectLocation()}>Select Location on Map</Button>
               </div>
             </>
           )}

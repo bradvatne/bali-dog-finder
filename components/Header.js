@@ -4,9 +4,10 @@ import FoundDog from "./forms/LostDog";
 import AdoptionDog from "./forms/LostDog";
 import { useState } from "react";
 
-export default function Header({ session, signIn, signOut }) {
-  const [modalShow, setModalShow] = useState({show: false, modalContent: ""});
-  function onHide() { setModalShow({show: false})}
+export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow }) {
+  function onHide() { 
+    setModalShow({show: false})
+  }
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
@@ -94,12 +95,11 @@ export default function Header({ session, signIn, signOut }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       show={modalShow.show}
-      onHide={onHide}
     >
-        {(modalShow.modalContent == 'lostdog') && <LostDog session={session} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'founddog') && <FoundDog session={session} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'adoptiondog') && <AdoptionDog session={session} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'signin') && <LostDog session={session} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modalContent == 'lostdog') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modalContent == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modalContent == 'adoptiondog') && <AdoptionDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modalContent == 'signin') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
     </Modal>
     </>
   );
