@@ -23,7 +23,7 @@ export default function LeafletMap({ data, center, selectingLocation, setSelecti
   return (
     <MapContainer
       center={[center.lat, center.long]}
-      zoom={12}
+      zoom={center.zoom}
       scrollWheelZoom={true}
       className={selectingLocation ? 'crosshair-cursor' : ''}
     >
@@ -32,7 +32,7 @@ export default function LeafletMap({ data, center, selectingLocation, setSelecti
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {selectingLocation && <SelectLocation/>}
-      {data.map((marker, index) => (
+      {!selectingLocation && data.map((marker, index) => (
         <Marker key={index} position={[marker.lat, marker.long]}>
           <Popup>
             <Card style={{ width: "18rem", border: "none" }}>

@@ -89,6 +89,11 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     }
   }
 
+  function cancel() {
+    localStorage.clear();
+    onHide();
+  }
+
   function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLocation([position.coords.latitude, position.coords.longitude]);
@@ -110,7 +115,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
               type="text"
               placeholder="Enter dog's name"
               onChange={(e) => setDogName(e.target.value)}
-              value={dogName}
+              value={dogName != 'null' ? dogName : ''}
             />
           </Form.Group>
           <Form.Group controlId="formGroupPassword">
@@ -120,7 +125,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
               rows={4}
               placeholder="Describe your lost dog and it's location"
               onChange={(e) => setDescription(e.target.value)}
-              value={description}
+              value={description != 'null' ? description : ''}
             />
             {!uploadComplete && (
               <div className="mt-3">
@@ -142,33 +147,20 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           {!locationComplete && (
             <>
               <div className="mt-3">
-                <Form.Label>Input Location:</Form.Label>
+                <Form.Label>{location[0] ? "Location succesfully registered, you may choose again if you wish:" : "Input Location:"}</Form.Label>
               </div>
               <div className="d-flex flex-row mt-2">
-                <Button
-                  variant="dark"
-                  className="mr-2"
-                  onClick={() => getCurrentLocation()}
-                >
-                  Use Current Location
-                </Button>
-                <Button variant="dark" onClick={()=> handleSelectLocation()}>Select Location on Map</Button>
+                <Button variant="dark" onClick={()=> handleSelectLocation()}>{location[0] ? 'Select New Location' : 'Select Location'}</Button>
               </div>
             </>
           )}
-          {locationComplete && (
-            <div className="mt-3">
-              <p>Geographic Coordinates selected:</p>
-              <p>Latitude - {location[0]}</p>
-              <p>Longitude - {location[1]}</p>
-            </div>
-          )}
+
 
           <Modal.Footer>
             <Button onClick={addDog} type="submit">
               Submit
             </Button>
-            <Button variant="danger" onClick={onHide}>
+            <Button variant="danger" onClick={cancel}>
               Cancel
             </Button>
           </Modal.Footer>
@@ -177,3 +169,25 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     </>
   );
 }
+
+{/**
+  USE CURRENT LOCATION
+
+                <Button
+                  variant="dark"
+                  className="mr-2"
+                  onClick={() => getCurrentLocation()}
+                >
+                  Use Current Location
+                </Button>
+
+            {locationComplete && (
+            <div className="mt-3">
+              <p>Geographic Coordinates selected:</p>
+              <p>Latitude - {location[0]}</p>
+              <p>Longitude - {location[1]}</p>
+            </div>
+          )}
+
+
+*/}

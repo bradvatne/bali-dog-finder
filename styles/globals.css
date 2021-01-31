@@ -10,3 +10,11 @@
 .crosshair-cursor {
     cursor: crosshair;
 }
+
+.modal-header .close {
+    display: none !important;
+}
+
+.leaflet-popup-close-button {
+    display: none !important;
+}
