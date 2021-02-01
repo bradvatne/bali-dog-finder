@@ -1,10 +1,13 @@
 import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
 import LostDog from "./forms/LostDog";
 import FoundDog from "./forms/LostDog";
-import AdoptionDog from "./forms/LostDog";
+import AdoptionDog from "./forms/AdoptionDog";
 import { useState } from "react";
 
 export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow, setCenter }) {
+  function onHide(){
+    setModalShow(false);
+  }
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
@@ -40,14 +43,14 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
             </NavDropdown>
             <Nav.Link
               onClick={() =>
-                setModalShow({ show: true, modalContent: "lostdog" })
+                session ? setModalShow({ show: true, modalContent: "lostdog" }) : signIn()
               }
             >
               + Lost Dog
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                setModalShow({ show: true, modalContent: "founddog" })
+                session ? setModalShow({ show: true, modalContent: "founddog" }) : signIn
               }
             >
               + Found Dog
@@ -94,6 +97,7 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
       aria-labelledby="contained-modal-title-vcenter"
       centered
       show={modalShow.show}
+      onHide={onHide}
     >
         {(modalShow.modalContent == 'lostdog') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
         {(modalShow.modalContent == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
