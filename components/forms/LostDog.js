@@ -101,7 +101,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
       });
       if (res.status === 201) {
         alert("Your dog has been added!");
-        onHide();
+        window.location.reload(true);
       } else {
         alert("Sorry, something went wrong.");
       }
