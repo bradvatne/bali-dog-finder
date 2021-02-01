@@ -107,7 +107,7 @@ const ImageUpload = ({ files, onDrop}) => {
     <div className="">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Click here or drag and drop to upload your favorite photo of your furry friend</p>
       </div>
       <aside style={thumbsContainer}>
         {thumbs}

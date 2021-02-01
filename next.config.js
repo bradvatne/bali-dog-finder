@@ -12,6 +12,6 @@ module.exports = {
     CLOUDINARY_API: "982427895672898",
   },
   images: {
-    domains: ["http://res.cloudinary.com/"],
+    domains: ["res.cloudinary.com"],
   },
 };

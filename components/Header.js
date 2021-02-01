@@ -4,6 +4,7 @@ import FoundDog from "./forms/LostDog";
 import AdoptionDog from "./forms/AdoptionDog";
 import { useState } from "react";
 
+
 export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow, setCenter }) {
   function onHide(){
     setModalShow(false);

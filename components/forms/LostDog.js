@@ -1,31 +1,42 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import UploadImage from "../../components/UploadImage";
 import axios from "axios";
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
   //Form Input State
-  const [location, setLocation] = useState([localStorage.getItem('lat'),localStorage.getItem('long')]);
-  const [dogName, setDogName] = useState(localStorage.getItem('dogname'));
-  const [description, setDescription] = useState(localStorage.getItem('description'));
-  const [imageurl, setImageUrl] = useState(localStorage.getItem('imageurl'));
+  const [location, setLocation] = useState([
+    localStorage.getItem("lat"),
+    localStorage.getItem("long"),
+  ]);
+  const [dogName, setDogName] = useState(localStorage.getItem("dogname"));
+  const [description, setDescription] = useState(
+    localStorage.getItem("description")
+  );
+  const [imageurl, setImageUrl] = useState(localStorage.getItem("imageurl"));
   const [files, setFiles] = useState([]);
-  const [uploadComplete, setUploadComplete] = useState(false);
-  const [locationComplete, setLocationComplete] = useState(false);
+  const [uploadComplete, setUploadComplete] = useState(localStorage.getItem("imageurl"));
+  const [locationComplete, setLocationComplete] = useState(localStorage.getItem("lat") > 2);
   const [validated, setValidated] = useState(false);
+
+  //autoUpload dropzone
+  useEffect(()=> {
+    if (!uploadComplete && files.length>0) {
+      upload();
+
+    }
+  })
 
   //Closes modal, saves state to local storage, changes selectLocation to true
   const handleSelectLocation = () => {
     onHide();
     setSelectingLocation(true);
-    localStorage.setItem('modaltype', 'lostdog')
-    localStorage.setItem('dogname', dogName);
-    localStorage.setItem('description', description);
-    localStorage.setItem('imageurl', imageurl);
-  }
+    localStorage.setItem("modaltype", "lostdog");
+    localStorage.setItem("dogname", dogName);
+    localStorage.setItem("description", description);
+    localStorage.setItem("imageurl", imageurl);
+  };
 
-
-  
   //Image Upload DropZone
   const onDrop = (acceptedFiles) => {
     setFiles(
@@ -61,10 +72,17 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     });
   };
 
-  //Form Submit API Logic
+  //Form Submit Logic
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(dogName, description, location, imageurl, session.id);
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      setValidated(true);
+      return;
+    }
+
     try {
       const res = await fetch("./api/markers", {
         method: "post",
@@ -72,7 +90,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          type: 'dogname',
+          type: "dogname",
           dogname: dogName,
           description: description,
           lat: location[0],
@@ -104,35 +122,48 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           Add Your Lost Dog's Information
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <Form>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group controlId="formGroupEmail">
             <Form.Label>Dog's Name:</Form.Label>
             <Form.Control
+              required
+              maxLength={20}
               type="text"
               placeholder="Enter dog's name"
-              onChange={(e) => setDogName(e)}
-              value={dogName != 'null' ? dogName : ''}
+              onChange={(e) => setDogName(e.target.value)}
+              value={dogName != "null" ? dogName : ""}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-            <Form.Control.Feedback type='invalid'>Dog's name must contain only letters and be less than 20 characters</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Please add your dog's name.
+            </Form.Control.Feedback>
           </Form.Group>
+
           <Form.Group controlId="formGroupPassword">
             <Form.Label>Description of Dog:</Form.Label>
             <Form.Control
+              required
+              maxLength={500}
               as="textarea"
               rows={4}
               placeholder="Describe your lost dog and it's location"
               onChange={(e) => setDescription(e.target.value)}
-              value={description != 'null' ? description : ''}
+              value={description != "null" ? description : ""}
             />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Please add a brief description.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group>
+            
             {!uploadComplete && (
               <div className="mt-3">
                 <Form.Label>Upload Images:</Form.Label>
                 <UploadImage files={files} onDrop={onDrop} />
-                <Button variant="dark" className="btn-width" onClick={() => upload()}>
-                  Upload Images
-                </Button>
               </div>
             )}
             {uploadComplete && (
@@ -143,20 +174,41 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
               </div>
             )}
           </Form.Group>
-          {!locationComplete && (
-            <>
-              <div className="mt-3">
-                <Form.Label>{location[0] ? "Location succesfully registered, you may choose again if you wish:" : "Input Location:"}</Form.Label>
-              </div>
-              <div className="d-flex flex-row mt-2">
-                <Button variant="dark" className="btn-width" onClick={()=> handleSelectLocation()}>{location[0] ? 'Select New Location' : 'Select Location'}</Button>
-              </div>
-            </>
-          )}
 
+          <Form.Group>
+            {!locationComplete && (
+              <>
+                <div className="d-flex flex-row mt-2">
+                  <Button
+                    variant="dark"
+                    className="w-100 "
+                    onClick={() => handleSelectLocation()}
+                  >
+                    {location[0] ? "Select New Location" : "Click Here to Select Location on Map"}
+                  </Button>
+                </div>
+                <input
+                  required=""
+                  maxlength="20"
+                  placeholder="Enter dog's name"
+                  type="hidden"
+                  id="location"
+                  class="form-control"
+                  value={location}
+                ></input>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please add a brief description.
+                </Form.Control.Feedback>
+              </>
+            )}
+          </Form.Group>
 
           <Modal.Footer>
-            <Button onClick={handleSubmit} type="submit">
+            <Button
+              type="submit"
+              disabled={!uploadComplete & !locationComplete}
+            >
               Submit
             </Button>
             <Button variant="danger" onClick={cancel}>
@@ -169,7 +221,8 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
   );
 }
 
-{/**
+{
+  /**
   USE CURRENT LOCATION
             function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -194,4 +247,5 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           )}
 
 
-*/}
+*/
+}
