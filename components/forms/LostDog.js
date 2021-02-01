@@ -62,7 +62,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
   };
 
   //Form Submit API Logic
-  async function addDog(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log(dogName, description, location, imageurl, session.id);
     try {
@@ -156,7 +156,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
 
 
           <Modal.Footer>
-            <Button onClick={addDog} type="submit">
+            <Button onClick={handleSubmit} type="submit">
               Submit
             </Button>
             <Button variant="danger" onClick={cancel}>

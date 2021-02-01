@@ -1,6 +1,5 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import {useState, useEffect} from 'react';
-import {useForm} from 'react-use-form'
 
 export default function AdoptionDog({onHide}) {
   const [formProgress, setFormProgress] = useState(1);
