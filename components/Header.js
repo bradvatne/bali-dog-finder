@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow, setCenter }) {
   function onHide(){
-    setModalShow(false);
+    setModalShow({show: false});
   }
   return (
     <>
@@ -44,21 +44,21 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
             </NavDropdown>
             <Nav.Link
               onClick={() =>
-                session ? setModalShow({ show: true, modalContent: "lostdog" }) : signIn()
+                session ? setModalShow({ show: true, modaltype: "lostdog", location: [] }) : signIn()
               }
             >
               + Lost Dog
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                session ? setModalShow({ show: true, modalContent: "founddog" }) : signIn
+                session ? setModalShow({ show: true, modaltype: "founddog" }) : signIn
               }
             >
               + Found Dog
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                setModalShow({ show: true, modalContent: "adoptiondog" })
+                setModalShow({ show: true, modaltype: "adoptiondog" })
               }
             >
               + Dog For Adoption
@@ -100,10 +100,10 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
       show={modalShow.show}
       onHide={onHide}
     >
-        {(modalShow.modalContent == 'lostdog') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'adoptiondog') && <AdoptionDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
-        {(modalShow.modalContent == 'signin') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modaltype== 'lostdog') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false, modaltype: localStorage.getItem('modaltype')})}/>}
+        {(modalShow.modaltype == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modaltype == 'adoptiondog') && <AdoptionDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modaltype == 'signin') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
     </Modal>
     </>
   );

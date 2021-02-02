@@ -18,19 +18,20 @@ export default function LeafletMap({
   setSelectingLocation,
   setModalShow,
 }) {
-  //gets lat long values from user click
+
+  //Gets lat long values from user click, store in localStorage to hoist back into the form
   function SelectLocation() {
     const map = useMapEvents({
       click(e) {
-        console.log(e.latlng);
-        setSelectingLocation(false);
-        localStorage.setItem("lat", e.latlng.lat);
-        localStorage.setItem("long", e.latlng.lng);
+        localStorage.setItem("lat", e.latlng.lat.toString());
+        localStorage.setItem("lng", e.latlng.lng.toString());
+        console.log(localStorage);
         setModalShow({
           show: true,
-          modalContent: localStorage.getItem("modaltype"),
+          modaltype: localStorage.getItem("modaltype"),
         });
-        console.log(localStorage);
+
+        setSelectingLocation(false);
       },
     });
     return null;
@@ -53,9 +54,7 @@ export default function LeafletMap({
           <Marker key={index} position={[marker.lat, marker.long]}>
             <Popup>
               <Card style={{ width: "18rem", border: "none" }}>
-                {marker.imageurl && (
-                    <Card.Img src={marker.imageurl} />
-                )}
+                {marker.imageurl && <Card.Img src={marker.imageurl} />}
                 <Card.Body>
                   <Card.Title>{marker.dogname}</Card.Title>
                   <Card.Text>{marker.description}</Card.Text>

@@ -12,7 +12,7 @@ export default function Home(data) {
   const [session, loading] = useSession();
   const [center, setCenter] = useState({ lat: -8.6, long: 115.2126, zoom: 12 });
   //Function to handle DogForm modal
-  const [modalShow, setModalShow] = useState({ show: false, modalContent: "" });
+  const [modalShow, setModalShow] = useState({ show: false, modaltype: "", location: [] });
 
   //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
   const [selectingLocation, setSelectingLocation] = useState(false)
@@ -21,6 +21,8 @@ export default function Home(data) {
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
     ssr: false,
   });
+
+  console.log(modalShow)
 
   return (
     <>
