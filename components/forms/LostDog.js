@@ -2,6 +2,7 @@ import { Form, Modal, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import UploadImage from "../../components/UploadImage";
 import axios from "axios";
+import imageCompression from 'browser-image-compression'
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
 
@@ -61,17 +62,22 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
       )
     );
   };
-  
+
   //Image Upload Logic
-  const upload = () => {
+  async function upload() {
     const uploadURL = "	https://api.cloudinary.com/v1_1/ddkclruno/image/upload";
     const uploadPreset = "okzkpnl4";
 
     files.forEach((file) => {
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", uploadPreset);
+      imageCompression(file, {maxSizeMB: .5, maxWidthOrHeight: 250}).then((res) => {
+            imageCompression.getDataUrlFromFile(res).then((compressedImageUrl)=> {
+            formData.append("file", compressedImageUrl)
+            formData.append("upload_preset", uploadPreset);
+            console.log(compressedImageUrl)
+          })
 
+      })
       axios({
         url: uploadURL,
         method: "POST",

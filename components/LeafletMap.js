@@ -6,7 +6,6 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { Card, Button } from "react-bootstrap";
-import Image from "next/image";
 
 //data = array of objects = marker data (dogs) from mongodb, gathered from getserversideprops in index.js
 //center = array[num] = map center position, state value from index.js for selecting specific locations in nav

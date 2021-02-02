@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "browser-image-compression": "^1.0.14",
     "leaflet": "^1.7.1",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.13",
