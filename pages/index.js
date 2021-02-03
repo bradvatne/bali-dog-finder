@@ -22,8 +22,6 @@ export default function Home(data) {
     ssr: false,
   });
 
-  console.log(modalShow)
-
   return (
     <>
       <Head>

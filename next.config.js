@@ -10,6 +10,8 @@ module.exports = {
       "cloudinary://982427895672898:CIw0FhDwX_Rm24zWUjm4APIrQdY@ddkclruno",
     CLOUDINARY_SECRET: "CIw0FhDwX_Rm24zWUjm4APIrQdY",
     CLOUDINARY_API: "982427895672898",
+    CLOUDINARY_UPLOAD: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
+    CLOUDINARY_PRESET: "okzkpnl4"
   },
   images: {
     domains: ["res.cloudinary.com"],

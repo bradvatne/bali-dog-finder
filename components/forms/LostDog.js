@@ -1,14 +1,14 @@
 import { Form, Modal, Button } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import UploadImage from "../../components/UploadImage";
+import { useState } from "react";
 import axios from "axios";
 import imageCompression from 'browser-image-compression'
+import uploadImage from './../../utils/uploadImage'
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
 
   //Form state fields will be filled by localstorage values (for re-rendering modal after location selection)
   const modaltype = "lostdog";
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState(null);
   const [dogname, setDogname] = useState(
     localStorage.getItem("dogname") != "null"
       ? localStorage.getItem("dogname")
@@ -43,54 +43,6 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     localStorage.setItem("imageurl", image);
     setSelectingLocation(true);
     onHide();
-  };
-
-  //Hacky solution to auto upload image from dropzone
-  useEffect(() => {
-    if (!image & (files.length > 0)) {
-      upload();
-    }
-  });
-
-  //Image Upload DropZone
-  const onDrop = (acceptedFiles) => {
-    setFiles(
-      acceptedFiles.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      )
-    );
-  };
-
-  //Image Upload Logic
-  async function upload() {
-    const uploadURL = "	https://api.cloudinary.com/v1_1/ddkclruno/image/upload";
-    const uploadPreset = "okzkpnl4";
-
-    files.forEach((file) => {
-      const formData = new FormData();
-      imageCompression(file, {maxSizeMB: .5, maxWidthOrHeight: 250}).then((res) => {
-            imageCompression.getDataUrlFromFile(res).then((compressedImageUrl)=> {
-            formData.append("file", compressedImageUrl)
-            formData.append("upload_preset", uploadPreset);
-            console.log(compressedImageUrl)
-          })
-
-      })
-      axios({
-        url: uploadURL,
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data: formData,
-      })
-        .then((res) => {
-          setImage(res.data.url.toString());
-        })
-        .catch((err) => setImage(""));
-    });
   };
 
   //Form Submit Logic
@@ -166,19 +118,9 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           </Form.Group>
 
           <Form.Group controlId="image">
-            {!image && (
-              <div className="mt-3">
-                <Form.Label>Upload Images:</Form.Label>
-                <UploadImage files={files} onDrop={onDrop} />
-              </div>
-            )}
-            {image && (
-              <div className="mt-3">
-                <Form.Label>
-                  Your image has been successfuly uploaded
-                </Form.Label>
-              </div>
-            )}
+            <input type="file"
+            onChange={e => uploadImage(e.target.files[0])}
+            />
           </Form.Group>
 
           <Form.Group controlId="location">
