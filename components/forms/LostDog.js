@@ -1,9 +1,6 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import { useState } from "react";
-import axios from "axios";
-import imageCompression from "browser-image-compression";
 import uploadImage from "./../../utils/uploadImage";
-import LoadingSpinner from "../LoadingSpinner"
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
   //Form state fields will be filled by localstorage values (for re-rendering modal after location selection)
@@ -84,6 +81,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     onHide();
   }
 
+  //Render
   return (
     <>
       <Modal.Header closeButton>
@@ -170,21 +168,6 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
             <Button variant="danger" onClick={cancel}>
               Cancel
             </Button>
-            <Button
-              variant="success"
-              onClick={() =>
-                console.log(
-                  image,
-                  location.lat,
-                  location.lng,
-                  dogname,
-                  description,
-                  imageLoading
-                )
-              }
-            >
-              Test State
-            </Button>
           </Modal.Footer>
         </Form>
       </Modal.Body>
@@ -219,4 +202,22 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
 
 
 */
+
+/** 
+ *             <Button
+              variant="success"
+              onClick={() =>
+                console.log(
+                  image,
+                  location.lat,
+                  location.lng,
+                  dogname,
+                  description,
+                  imageLoading
+                )
+              }
+            >
+              Test State
+            </Button>
+ */
 }
