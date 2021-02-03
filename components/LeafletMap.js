@@ -18,8 +18,11 @@ export default function LeafletMap({
   setModalShow,
 }) {
 
+  
+
   //Gets lat long values from user click, store in localStorage to hoist back into the form
   function SelectLocation() {
+    const CustomMarker = L.icon({ iconUrl: './marker-red.png' })
     const map = useMapEvents({
       click(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());

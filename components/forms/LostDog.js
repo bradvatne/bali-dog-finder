@@ -143,7 +143,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
                   className="w-100 "
                   onClick={handleSelectLocation}
                 >
-                  {location
+                  {location.lat != 0
                     ? "Select New Location"
                     : "Click Here to Select Location on Map"}
                 </Button>

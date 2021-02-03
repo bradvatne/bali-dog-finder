@@ -118,3 +118,8 @@
       opacity: 0;
     }
   }
+
+  /* bootstrap overrides */
+  .nav-link {
+      font-size: .9rem;
+  }
