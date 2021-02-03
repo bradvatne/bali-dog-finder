@@ -1,14 +1,15 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import imageCompression from 'browser-image-compression'
-import uploadImage from './../../utils/uploadImage'
+import imageCompression from "browser-image-compression";
+import uploadImage from "./../../utils/uploadImage";
+import LoadingSpinner from "../LoadingSpinner"
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
-
   //Form state fields will be filled by localstorage values (for re-rendering modal after location selection)
   const modaltype = "lostdog";
   const [file, setFile] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
   const [dogname, setDogname] = useState(
     localStorage.getItem("dogname") != "null"
       ? localStorage.getItem("dogname")
@@ -59,14 +60,15 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           type: "lostdog",
           dogname: dogname,
           description: description,
-          lat: location.latlng[0],
-          long: location.latlng[1],
+          lat: location.lat,
+          long: location.lng,
           imageurl: image,
           user: session.id,
         }),
       });
       if (res.status === 201) {
         alert("Your dog has been added!");
+        localStorage.clear();
         window.location.reload(true);
       } else {
         alert("Sorry, something went wrong.");
@@ -90,9 +92,9 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body controlId="dogname">
+      <Modal.Body controlid="dogname">
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formGroupEmail">
+          <Form.Group controlid="formGroupEmail">
             <Form.Label>Dog's Name:</Form.Label>
             <Form.Control
               required
@@ -104,7 +106,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
             />
           </Form.Group>
 
-          <Form.Group controlId="description">
+          <Form.Group controlid="description">
             <Form.Label>Description of Dog:</Form.Label>
             <Form.Control
               required
@@ -117,13 +119,25 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
             />
           </Form.Group>
 
-          <Form.Group controlId="image">
-            <input type="file"
-            onChange={e => uploadImage(e.target.files[0])}
-            />
+          <Form.Group controlid="image">
+            {!image && (
+              <input
+                type="file"
+                onChange={(e) => uploadImage(e.target.files[0], setImage, setImageLoading, imageLoading)}
+                accept="image/*"
+                className={imageLoading ? "hide-input" : ""}
+              />
+            )}
+             {imageLoading && <img src="./spinner.gif"/>} 
+            {image && (
+              <>
+                <Form.Label>Image Succesfully Uploaded</Form.Label>
+                <img src={image} className="preview-img" />
+              </>
+            )}
           </Form.Group>
 
-          <Form.Group controlId="location">
+          <Form.Group controlid="location">
             <>
               <div className="d-flex flex-row mt-2">
                 <Button
@@ -143,7 +157,11 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
             <Button
               type="submit"
               disabled={
-                !image || !location.lat || !location.lng || !dogname || !description
+                !image ||
+                !location.lat ||
+                !location.lng ||
+                !dogname ||
+                !description
               }
             >
               Submit
@@ -151,6 +169,21 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
 
             <Button variant="danger" onClick={cancel}>
               Cancel
+            </Button>
+            <Button
+              variant="success"
+              onClick={() =>
+                console.log(
+                  image,
+                  location.lat,
+                  location.lng,
+                  dogname,
+                  description,
+                  imageLoading
+                )
+              }
+            >
+              Test State
             </Button>
           </Modal.Footer>
         </Form>

@@ -4,16 +4,15 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import dbConnect from "../utils/dbConnect";
 import MarkerData from "../models/Marker";
 import dynamic from "next/dynamic";
-
 import Header from "../components/Header";
 
 export default function Home(data) {
   //Next Auth Session, passed to Form
   const [session, loading] = useSession();
+  //Map Center (used for selecting location)
   const [center, setCenter] = useState({ lat: -8.6, long: 115.2126, zoom: 12 });
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({ show: false, modaltype: "", location: [] });
-
   //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
   const [selectingLocation, setSelectingLocation] = useState(false)
 
