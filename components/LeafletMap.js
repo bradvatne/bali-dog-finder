@@ -17,12 +17,8 @@ export default function LeafletMap({
   setSelectingLocation,
   setModalShow,
 }) {
-
-  
-
   //Gets lat long values from user click, store in localStorage to hoist back into the form
   function SelectLocation() {
-    const CustomMarker = L.icon({ iconUrl: './marker-red.png' })
     const map = useMapEvents({
       click(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());
@@ -39,6 +35,22 @@ export default function LeafletMap({
     return null;
   }
 
+  //Markers
+  const redMarker = L.icon({ iconUrl: "./marker-red.png", iconSize: [25, 40] });
+  const purpleMarker = L.icon({
+    iconUrl: "./marker-purple.png",
+    iconSize: [25, 40],
+  });
+  const greenMarker = L.icon({
+    iconUrl: "./marker-green.png",
+    iconSize: [25, 40],
+  });
+  const markerColor = [redMarker, purpleMarker, greenMarker];
+
+  function getRandomColor() {
+    return markerColor[Math.floor(Math.random() * 3)];
+  }
+
   return (
     <MapContainer
       center={[center.lat, center.long]}
@@ -50,10 +62,18 @@ export default function LeafletMap({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <Marker
+        icon={getRandomColor()}
+        position={[-8.508275852717324, 115.26692973077012]}
+      />
       {selectingLocation && <SelectLocation />}
       {!selectingLocation &&
         data.map((marker, index) => (
-          <Marker key={index} position={[marker.lat, marker.long]}>
+          <Marker
+            icon={getRandomColor()}
+            key={index}
+            position={[marker.lat, marker.long]}
+          >
             <Popup>
               <Card style={{ width: "18rem", border: "none" }}>
                 {marker.imageurl && <Card.Img src={marker.imageurl} />}
