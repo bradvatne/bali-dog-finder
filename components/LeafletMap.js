@@ -5,7 +5,7 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import DogCard from '../components/DogCard'
+import DogCard from "../components/DogCard";
 
 //PROPS:
 //data = array of objects = marker data (dogs) from mongodb, gathered from getserversideprops in index.js
@@ -45,7 +45,7 @@ export default function LeafletMap({
         });
 
         setSelectingLocation(false);
-      }
+      },
     });
     return null;
   }
@@ -75,7 +75,7 @@ export default function LeafletMap({
         return redMarker;
       case "founddog":
         return greenMarker;
-      case "adoptiondog":
+      case "adoptdog":
         return purpleMarker;
       default:
         return redMarker;
@@ -91,9 +91,7 @@ export default function LeafletMap({
       className={selectingLocation ? "crosshair-cursor" : ""}
       attributionControl={false}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {selectingLocation && <SelectLocation />}
       {!selectingLocation &&
         data.map((marker, index) => {
@@ -105,7 +103,7 @@ export default function LeafletMap({
                 position={[marker.lat, marker.long]}
               >
                 <Popup>
-                  <DogCard marker={marker}/>
+                  <DogCard marker={marker} />
                 </Popup>
               </Marker>
             );
@@ -117,7 +115,7 @@ export default function LeafletMap({
                 position={[marker.lat, marker.long]}
               >
                 <Popup>
-                  <DogCard marker={marker}/>
+                  <DogCard marker={marker} />
                 </Popup>
               </Marker>
             );

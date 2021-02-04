@@ -1,4 +1,4 @@
-import { Form, Modal, Button } from "react-bootstrap";
+import { Form, Modal, Button, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import uploadImage from "./../../utils/uploadImage";
 
@@ -7,6 +7,12 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
   const modaltype = "founddog";
   const [file, setFile] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
+
+  const [number, setNumber] = useState(
+    localStorage.getItem("number") != "null"
+      ? localStorage.getItem("number")
+      : ""
+  );
   const [dogname, setDogname] = useState(
     localStorage.getItem("dogname") != "null"
       ? localStorage.getItem("dogname")
@@ -16,6 +22,16 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
     localStorage.getItem("description") != "null"
       ? localStorage.getItem("description")
       : ""
+  );
+  const [gender, setGender] = useState(
+    localStorage.getItem("gender") != "null"
+      ? localStorage.getItem("gender")
+      : null
+  );
+  const [size, setSize] = useState(
+    localStorage.getItem("size") != "null"
+      ? localStorage.getItem("size")
+      : null
   );
   const [image, setImage] = useState(
     localStorage.getItem("imageurl") != "null"
@@ -39,6 +55,9 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
     localStorage.setItem("dogname", dogname);
     localStorage.setItem("description", description);
     localStorage.setItem("imageurl", image);
+    localStorage.setItem("gender", gender);
+    localStorage.setItem("size", size);
+    localStorage.setItem("number", number);
     setSelectingLocation(true);
     onHide();
   };
@@ -57,9 +76,12 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
           type: "founddog",
           dogname: dogname,
           description: description,
+          size: size,
+          gender: gender,
           lat: location.lat,
           long: location.lng,
           imageurl: image,
+          number: number,
           user: session.id,
         }),
       });
@@ -68,9 +90,11 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
         localStorage.clear();
         window.location.reload(true);
       } else {
+        console.log(res)
         alert("Sorry, something went wrong.");
       }
     } catch (err) {
+      console.log(err)
       alert("Sorry, something went wrong.");
     }
   }
@@ -86,7 +110,7 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
     <>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Found a doggo? Fill out its information here
+        Want to reunite a lost pupper with its family?
         </Modal.Title>
       </Modal.Header>
 
@@ -117,23 +141,66 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
             />
           </Form.Group>
 
-          <Form.Group controlid="image">
+          <Form.Group controlid="formGroupEmail">
+            <Form.Label>WhatsApp Number</Form.Label>
+            <Form.Control
+              required
+              maxLength={15}
+              type="text"
+              placeholder="+62 123 456 7890 (please include country code)"
+              onChange={(e) => setNumber(e.target.value)}
+              defaultValue={number}
+            />
+          </Form.Group>
+
+          <Form.Group controlid="gender">
+            <Form.Control
+              required
+              as="select"
+              onChange={(e) => setGender(e.target.value)}
+              defaultValue={gender}
+            >
+              <option>Select Gender...</option>
+              <option value={true}>Female</option>
+              <option value={false}>Male</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group controlid="size">
+            <Form.Control
+              required
+              as="select"
+              onChange={(e) => setSize(e.target.value)}
+              defaultValue={size}
+            >
+              <option>Select Size...</option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+            </Form.Control>
+          </Form.Group>
+
+          <InputGroup controlid="image">
             {!image && (
+              <label  className={imageLoading ? "hide-input" : "form-control text-center"}>
+                Click here to upload your photo
               <input
                 type="file"
                 onChange={(e) => uploadImage(e.target.files[0], setImage, setImageLoading, imageLoading)}
                 accept="image/*"
-                className={imageLoading ? "hide-input" : ""}
+                className={imageLoading ? " " : "hide-input"
+                }
               />
+              </label>
             )}
              {imageLoading && <img src="./spinner.gif"/>} 
             {image && (
               <>
-                <Form.Label>Image Succesfully Uploaded</Form.Label>
-                <img src={image} className="preview-img" />
+                <Form.Label className="form-control text-center">Image Succesfully Uploaded!</Form.Label>
+
               </>
             )}
-          </Form.Group>
+          </InputGroup>
 
           <Form.Group controlid="location">
             <>
@@ -175,7 +242,7 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
   );
 }
 
-{
+
   /**
   USE CURRENT LOCATION
             function getCurrentLocation() {
@@ -220,4 +287,4 @@ export default function FoundDog({ onHide, session, setSelectingLocation }) {
               Test State
             </Button>
  */
-}
+

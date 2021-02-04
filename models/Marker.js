@@ -4,7 +4,7 @@ const MarkerSchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      maxlength: 10,
+      maxlength: 15,
       required: true
     },
     dogname: {
@@ -14,7 +14,12 @@ const MarkerSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      maxlength: 200,
+      maxlength: 400,
+      required: true
+    },
+    number: {
+      type: String,
+      maxlength: 15,
       required: true
     },
     lat: {

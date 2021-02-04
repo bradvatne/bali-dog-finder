@@ -217,6 +217,9 @@
 	border: 1px solid #999;
     }
 
+.brand-logo-img {
+    max-height: 21px;
+}
     
 /* Custom Card */
 .card-img-container {
@@ -224,7 +227,7 @@
 
 .card-img {
     object-fit: cover;
-    max-height: 250px;
+    max-height: 450px;
     min-width: 300px;
 }
 
@@ -239,7 +242,17 @@
     display: flex;
     flex-direction: row;
     line-height: 15px;
-    margin-bottom: 18px;
-    margin-top: 18px;
+
 }
 
+/* badges */
+
+.badge-female {
+    background-color: #ff95d6;
+    color: white;
+}
+
+.badge-adoption {
+    background-color: #3F00FF !important;
+    color: white;
+}
