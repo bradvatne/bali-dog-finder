@@ -15,7 +15,7 @@ export default function DogCard({ marker }) {
       <p className="px-3">{description}</p>
       <div className="card-contact-section px-3">
         <img src="./whatsapp-logo.png" className="whatsapp-logo" />
-        <p>+1 234 567 8910</p>
+        <p className="font-weight-bold">+1 234 567 8910</p>
       </div>
       <div className="d-flex flex-row justify-content-between px-3 pb-3">
         <small>Posted on {createdAt.substring(0, 10)}</small>
