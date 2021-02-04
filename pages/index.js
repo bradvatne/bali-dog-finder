@@ -18,7 +18,7 @@ export default function Home(data) {
   //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
   const [selectingLocation, setSelectingLocation] = useState(false)
 
-  //Disable Leaflet SSR
+  //Disable Leaflet SSR - Mandatory for compatibility with NextJS
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
     ssr: false,
   });

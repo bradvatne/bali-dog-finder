@@ -5,11 +5,14 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import { Card, Button } from "react-bootstrap";
+import DogCard from '../components/DogCard'
 
+//PROPS:
 //data = array of objects = marker data (dogs) from mongodb, gathered from getserversideprops in index.js
 //center = array[num] = map center position, state value from index.js for selecting specific locations in nav
 //selectingLocation = boolean = state value triggered by dog forms, recieved from index.js
+//modalShow = object = contains information about which modal to display and whether or not to display
+//markerFilter = string = set by header navbar to handle filter state for map markers
 export default function LeafletMap({
   data,
   center,
@@ -21,6 +24,7 @@ export default function LeafletMap({
   //Gets lat long values from user click, store in localStorage to hoist back into the form
   function SelectLocation() {
     const map = useMapEvents({
+      //Onclick for desktop
       click(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());
         localStorage.setItem("lng", e.latlng.lng.toString());
@@ -31,6 +35,7 @@ export default function LeafletMap({
 
         setSelectingLocation(false);
       },
+      //Touch support for mobile
       touchstart(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());
         localStorage.setItem("lng", e.latlng.lng.toString());
@@ -44,12 +49,6 @@ export default function LeafletMap({
     });
     return null;
   }
-
-   //Create Red Marker (Lost Dog)
-   const defaultMarker = L.icon({
-    iconUrl: "./marker-purple.png",
-    iconSize: [25, 40],
-  });
 
   //Create Red Marker (Lost Dog)
   const redMarker = L.icon({
@@ -69,14 +68,7 @@ export default function LeafletMap({
     iconSize: [25, 40],
   });
 
-  //Marker Array
-  const markerColor = [redMarker, purpleMarker, greenMarker];
-
-  //TESTING MARKERS - Random Marker Colors
-  function getRandomColor() {
-    return markerColor[Math.floor(Math.random() * 3)];
-  }
-
+  //Get marker type for filters
   function getIconColor(markerType) {
     switch (markerType) {
       case "lostdog":
@@ -86,10 +78,11 @@ export default function LeafletMap({
       case "adoptiondog":
         return purpleMarker;
       default:
-        return defaultMarker;
+        return redMarker;
     }
   }
 
+  //Render Map and Markers
   return (
     <MapContainer
       center={[center.lat, center.long]}
@@ -112,16 +105,7 @@ export default function LeafletMap({
                 position={[marker.lat, marker.long]}
               >
                 <Popup>
-                  <Card style={{ width: "18rem", border: "none" }}>
-                    {marker.imageurl && <Card.Img src={marker.imageurl} />}
-                    <Card.Body>
-                      <Card.Title>{marker.dogname}</Card.Title>
-                      <Card.Text>{marker.description}</Card.Text>
-                      <Button variant="primary" className="w-100">
-                        Contact Owner
-                      </Button>
-                    </Card.Body>
-                  </Card>
+                  <DogCard marker={marker}/>
                 </Popup>
               </Marker>
             );
@@ -133,16 +117,7 @@ export default function LeafletMap({
                 position={[marker.lat, marker.long]}
               >
                 <Popup>
-                  <Card style={{ width: "18rem", border: "none" }}>
-                    {marker.imageurl && <Card.Img src={marker.imageurl} />}
-                    <Card.Body>
-                      <Card.Title>{marker.dogname}</Card.Title>
-                      <Card.Text>{marker.description}</Card.Text>
-                      <Button variant="primary" className="w-100">
-                        Contact Owner
-                      </Button>
-                    </Card.Body>
-                  </Card>
+                  <DogCard marker={marker}/>
                 </Popup>
               </Marker>
             );
@@ -151,13 +126,3 @@ export default function LeafletMap({
     </MapContainer>
   );
 }
-
-/*
-            {markerData && markerData.map((marker, index) => (
-            <Marker position={[marker.lat, marker.long]}>
-                <Popup>
-                    {marker.dogname}<br/>
-                </Popup>
-                </Marker>
-          ))}
-*/
