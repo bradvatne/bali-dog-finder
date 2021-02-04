@@ -41,6 +41,10 @@ npm run dev
  - Add checklist for adopted dog traits (vaccination, sterilization, gender, etc.) and display
  - Improve UI
 
+### ⚡ Big Dreams
+ - QR Code Link + lost dog poster generator
+ - Share link with preview image of map location + dog photo 50-50 split
+
 ### 👨 About Me
 Hi! 👋 I'm Brad!
 My story starts like many others. I left my 3rd year of my Computer Science degree in late 2019 and set out travelling Southeast Asia. As the pandemic began to erupt in early 2020, I decided to settle in Bali. In November of 2020 I started learning Next.js. After building a few basic projects, I felt prepared to tackle something a little more involved. Many community Facebook groups in Bali are inundated daily with multiple posts of dogs that are lost or found. Given that, I found a way to help the community and also develop my skills. 
