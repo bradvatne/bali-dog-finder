@@ -47,7 +47,7 @@ My story starts like many others. I left my 3rd year of my Computer Science degr
 
 I am now building my first real web-app, I'm engaged to my wonderfully supportive fiancee with a child on the way, and hoping to be employable soon. 
 
-My technical goals for this project were to get a feel for the development process from start to finish and gain a true understanding of the technologies used. For this reason, I limited most of my research to within the documentation of the technologies used, rather than just copy + pasting from tutorials.
+My technical goals for this project were to get a feel for the development process from start to finish and gain a true understanding of the technologies used. For this reason, I limited most of my research to within their respective documentation, rather than just copy + pasting from tutorials.
 
 If you are interested in hiring a remote junior dev, or have a position in Bali that would suite my skillset, please contact me at bradvatne at gmail dot com.
 
