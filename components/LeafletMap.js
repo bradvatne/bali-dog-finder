@@ -31,6 +31,16 @@ export default function LeafletMap({
 
         setSelectingLocation(false);
       },
+      touchstart(e) {
+        localStorage.setItem("lat", e.latlng.lat.toString());
+        localStorage.setItem("lng", e.latlng.lng.toString());
+        setModalShow({
+          show: true,
+          modaltype: localStorage.getItem("modaltype"),
+        });
+
+        setSelectingLocation(false);
+      }
     });
     return null;
   }
