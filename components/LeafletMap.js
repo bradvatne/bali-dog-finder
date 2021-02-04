@@ -89,9 +89,9 @@ export default function LeafletMap({
       zoom={center.zoom}
       scrollWheelZoom={true}
       className={selectingLocation ? "crosshair-cursor" : ""}
+      attributionControl={false}
     >
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {selectingLocation && <SelectLocation />}
