@@ -35,19 +35,23 @@ npm run dev
 
 ### ✅ Todos
 
- - Write Tests
- - Add database rules
- - Create list view for dogs
- - Add checklist for adopted dog traits (vaccination, sterilization, gender, etc.) and display
+ - Create airbnb style list interface for dogs
+ - Client Side Form Validation
+ - User profile
+ - User delete / claim dog found option
+ - Admin interface
+ - Report feature
+ - reCaptcha
  - Improve UI
 
 ### ⚡ Big Dreams
  - QR Code Link + lost dog poster generator
  - Share link with preview image of map location + dog photo 50-50 split
+ - If the app is used, some sort of data visualization display
 
 ### 👨 About Me
 Hi! 👋 I'm Brad!
-My story starts like many others. I left my 3rd year of my Computer Science degree in late 2019 and set out travelling Southeast Asia. As the pandemic began to erupt in early 2020, I decided to settle in Bali. In November of 2020 I started learning Next.js. After building a few basic projects, I felt prepared to tackle something a little more involved. Many community Facebook groups in Bali are inundated daily with multiple posts of dogs that are lost or found. Given that, I found a way to help the community and also develop my skills. 
+My story starts like many others. I took a break during my third year of a Computer Science degree in late 2019 and set out travelling Southeast Asia. As the pandemic began to erupt in early 2020, I decided to settle in Bali. In November of 2020 I started learning Next.js. After building a few basic projects, I felt prepared to tackle something a little more involved. Many community Facebook groups in Bali are inundated daily with multiple posts of dogs that are lost or found. Given that, I found a way to help the community and also develop my skills. 
 
 I am now building my first real web-app, I'm engaged to my wonderfully supportive fiancee with a child on the way, and hoping to be employable soon. 
 
