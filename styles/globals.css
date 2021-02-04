@@ -216,6 +216,7 @@
 .leaflet-oldie .leaflet-popup-tip {
 	border: 1px solid #999;
     }
+
     
 /* Custom Card */
 .card-img-container {
@@ -228,8 +229,8 @@
 }
 
 .whatsapp-logo {
-    height: 25px;
-    width: 25px;
+    height: 15px;
+    width: 15px;
     display: block;
     margin-right: 10px; 
 }
@@ -237,7 +238,8 @@
 .card-contact-section {
     display: flex;
     flex-direction: row;
-    line-height: 25px;
+    line-height: 15px;
     margin-bottom: 18px;
     margin-top: 18px;
 }
+
