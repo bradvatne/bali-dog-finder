@@ -1,11 +1,11 @@
 import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
 import LostDog from "./forms/LostDog";
-import FoundDog from "./forms/LostDog";
+import FoundDog from "./forms/FoundDog";
 import AdoptionDog from "./forms/AdoptionDog";
 import { useState } from "react";
 
 
-export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow, setCenter }) {
+export default function Header({ session, signIn, signOut, setSelectingLocation, modalShow, setModalShow, setCenter, setMarkerFilter, markerFilter }) {
   function onHide(){
     setModalShow({show: false});
   }
@@ -28,17 +28,17 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
               <NavDropdown.Item onClick={()=> setCenter({lat: -8.504769316013077, long: 115.26303521236298, zoom: 15})}>Ubud</NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Filters" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item onClick={()=> setMarkerFilter('lostdog')}>
                 Show Only Lost Dogs
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item onClick={()=> setMarkerFilter('founddog')}>
                 Show Only Found Dogs
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
+              <NavDropdown.Item onClick={()=> setMarkerFilter('adoptiondog')}>
                 Show Only Dogs for Adoption
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
+              <NavDropdown.Item onClick={()=> setMarkerFilter('showAll')}>
                 Show All Dogs
               </NavDropdown.Item>
             </NavDropdown>
@@ -51,7 +51,7 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                session ? setModalShow({ show: true, modaltype: "founddog" }) : signIn
+                session ? setModalShow({ show: true, modaltype: "founddog", location: [] }) : signIn()
               }
             >
               + Found Dog
@@ -101,7 +101,7 @@ export default function Header({ session, signIn, signOut, setSelectingLocation,
       onHide={onHide}
     >
         {(modalShow.modaltype== 'lostdog') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false, modaltype: localStorage.getItem('modaltype')})}/>}
-        {(modalShow.modaltype == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
+        {(modalShow.modaltype == 'founddog') && <FoundDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false, modaltype: localStorage.getItem('modaltype')})}/>}
         {(modalShow.modaltype == 'adoptiondog') && <AdoptionDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
         {(modalShow.modaltype == 'signin') && <LostDog session={session} setSelectingLocation={setSelectingLocation} onHide={() => setModalShow({show: false})}/>}
     </Modal>

@@ -86,7 +86,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     <>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add Your Lost Dog's Information
+        Can't find your furry friend? Fill out its information here
         </Modal.Title>
       </Modal.Header>
 

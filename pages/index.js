@@ -11,6 +11,8 @@ export default function Home(data) {
   const [session, loading] = useSession();
   //Map Center (used for selecting location)
   const [center, setCenter] = useState({ lat: -8.6, long: 115.2126, zoom: 12 });
+  //Marker filters
+  const [markerFilter, setMarkerFilter] = useState('showAll')
   //Function to handle DogForm modal
   const [modalShow, setModalShow] = useState({ show: false, modaltype: "", location: [] });
   //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
@@ -37,10 +39,12 @@ export default function Home(data) {
         modalShow={modalShow}
         setSelectingLocation={setSelectingLocation}
         setCenter={setCenter}
+        setMarkerFilter={setMarkerFilter}
+        markerFilter={markerFilter}
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data.data} center={center} selectingLocation={selectingLocation} setSelectingLocation={setSelectingLocation} setModalShow={setModalShow}/>
+        <LeafletMap data={data.data} center={center} selectingLocation={selectingLocation} setSelectingLocation={setSelectingLocation} setModalShow={setModalShow} markerFilter={markerFilter} />
       </div>
     </>
   );

@@ -16,6 +16,7 @@ export default function LeafletMap({
   selectingLocation,
   setSelectingLocation,
   setModalShow,
+  markerFilter,
 }) {
   //Gets lat long values from user click, store in localStorage to hoist back into the form
   function SelectLocation() {
@@ -23,7 +24,6 @@ export default function LeafletMap({
       click(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());
         localStorage.setItem("lng", e.latlng.lng.toString());
-        console.log(localStorage);
         setModalShow({
           show: true,
           modaltype: localStorage.getItem("modaltype"),
@@ -35,20 +35,49 @@ export default function LeafletMap({
     return null;
   }
 
-  //Markers
-  const redMarker = L.icon({ iconUrl: "./marker-red.png", iconSize: [25, 40] });
+   //Create Red Marker (Lost Dog)
+   const defaultMarker = L.icon({
+    iconUrl: "./marker-purple.png",
+    iconSize: [25, 40],
+  });
+
+  //Create Red Marker (Lost Dog)
+  const redMarker = L.icon({
+    iconUrl: "./marker-red.png",
+    iconSize: [25, 40],
+  });
+
+  //Create Purple Marker (Adoption Dog)
   const purpleMarker = L.icon({
     iconUrl: "./marker-purple.png",
     iconSize: [25, 40],
   });
+
+  //Create Green Marker (Found Dog)
   const greenMarker = L.icon({
     iconUrl: "./marker-green.png",
     iconSize: [25, 40],
   });
+
+  //Marker Array
   const markerColor = [redMarker, purpleMarker, greenMarker];
 
+  //TESTING MARKERS - Random Marker Colors
   function getRandomColor() {
     return markerColor[Math.floor(Math.random() * 3)];
+  }
+
+  function getIconColor(markerType) {
+    switch (markerType) {
+      case "lostdog":
+        return redMarker;
+      case "founddog":
+        return greenMarker;
+      case "adoptiondog":
+        return purpleMarker;
+      default:
+        return defaultMarker;
+    }
   }
 
   return (
@@ -62,32 +91,53 @@ export default function LeafletMap({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker
-        icon={getRandomColor()}
-        position={[-8.508275852717324, 115.26692973077012]}
-      />
       {selectingLocation && <SelectLocation />}
       {!selectingLocation &&
-        data.map((marker, index) => (
-          <Marker
-            icon={getRandomColor()}
-            key={index}
-            position={[marker.lat, marker.long]}
-          >
-            <Popup>
-              <Card style={{ width: "18rem", border: "none" }}>
-                {marker.imageurl && <Card.Img src={marker.imageurl} />}
-                <Card.Body>
-                  <Card.Title>{marker.dogname}</Card.Title>
-                  <Card.Text>{marker.description}</Card.Text>
-                  <Button variant="primary" className="w-100">
-                    Contact Owner
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Popup>
-          </Marker>
-        ))}
+        data.map((marker, index) => {
+          if (markerFilter == "showAll")
+            return (
+              <Marker
+                icon={getIconColor(marker.type)}
+                key={index}
+                position={[marker.lat, marker.long]}
+              >
+                <Popup>
+                  <Card style={{ width: "18rem", border: "none" }}>
+                    {marker.imageurl && <Card.Img src={marker.imageurl} />}
+                    <Card.Body>
+                      <Card.Title>{marker.dogname}</Card.Title>
+                      <Card.Text>{marker.description}</Card.Text>
+                      <Button variant="primary" className="w-100">
+                        Contact Owner
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Popup>
+              </Marker>
+            );
+          else if (markerFilter == marker.type)
+            return (
+              <Marker
+                icon={getIconColor(marker.type)}
+                key={index}
+                position={[marker.lat, marker.long]}
+              >
+                <Popup>
+                  <Card style={{ width: "18rem", border: "none" }}>
+                    {marker.imageurl && <Card.Img src={marker.imageurl} />}
+                    <Card.Body>
+                      <Card.Title>{marker.dogname}</Card.Title>
+                      <Card.Text>{marker.description}</Card.Text>
+                      <Button variant="primary" className="w-100">
+                        Contact Owner
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Popup>
+              </Marker>
+            );
+          else return null;
+        })}
     </MapContainer>
   );
 }
