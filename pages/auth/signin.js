@@ -5,7 +5,7 @@ const SignInPage = () => {
   const [session, loading] = useSession()
 
   useEffect(() => {
-    if (!loading && !session) void signIn('google')
+    if (!loading && !session) void signIn('google', {callbackUrl: 'https://balidogfinder.vercel.app'})
     if (!loading && session) window.close()
   }, [session, loading])
 
