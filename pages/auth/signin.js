@@ -1,19 +1,15 @@
-import { providers, signIn } from 'next-auth/client'
+import { useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/client'
 
-export default function SignIn({ providers }) {
-  return (
-    <>
-      {Object.values(providers).map(provider => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>Sign in with {provider.name}</button>
-        </div>
-      ))}
-    </>
-  )
+const SignInPage = () => {
+  const [session, loading] = useSession()
+
+  useEffect(() => {
+    if (!loading && !session) void signIn('google')
+    if (!loading && session) window.close()
+  }, [session, loading])
+
+  return null
 }
 
-SignIn.getInitialProps = async (context) => {
-  return {
-    providers: await providers(context)
-  }
-}
+export default SignInPage

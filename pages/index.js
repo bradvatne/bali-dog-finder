@@ -12,17 +12,20 @@ export default function Home(data) {
   //Map Center (used for selecting location)
   const [center, setCenter] = useState({ lat: -8.6, long: 115.2126, zoom: 12 });
   //Marker filters
-  const [markerFilter, setMarkerFilter] = useState('showAll')
+  const [markerFilter, setMarkerFilter] = useState("showAll");
   //Function to handle DogForm modal
-  const [modalShow, setModalShow] = useState({ show: false, modaltype: "", location: [] });
+  const [modalShow, setModalShow] = useState({
+    show: false,
+    modaltype: "",
+    location: [],
+  });
   //Selecting Location State, triggered by Add Dog forms, consumed by LeafletMap
-  const [selectingLocation, setSelectingLocation] = useState(false)
+  const [selectingLocation, setSelectingLocation] = useState(false);
 
   //Disable Leaflet SSR - Mandatory for compatibility with NextJS
   const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
     ssr: false,
   });
-
 
   return (
     <>
@@ -31,11 +34,17 @@ export default function Home(data) {
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         />
-        <link rel="preconnect" href="https://fonts.gstatic.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"/>
-      
-<link rel="preconnect" href="https://fonts.gstatic.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Montserrat:wght@600&display=swap" rel="stylesheet"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+          rel="stylesheet"
+        />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Montserrat:wght@600&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <Header
         signIn={signIn}
@@ -50,7 +59,14 @@ export default function Home(data) {
       />
 
       <div className="leaflet-container">
-        <LeafletMap data={data.data} center={center} selectingLocation={selectingLocation} setSelectingLocation={setSelectingLocation} setModalShow={setModalShow} markerFilter={markerFilter} />
+        <LeafletMap
+          data={data.data}
+          center={center}
+          selectingLocation={selectingLocation}
+          setSelectingLocation={setSelectingLocation}
+          setModalShow={setModalShow}
+          markerFilter={markerFilter}
+        />
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import LostDog from "./forms/LostDog";
 import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
 import { useState } from "react";
-import SignInModal from "./SignInModal";
+import NewWindow from "react-new-window";
 
 export default function Header({
   session,
@@ -19,6 +19,7 @@ export default function Header({
   function onHide() {
     setModalShow({ show: false });
   }
+  const [popUp, setPopUp] = useState(false);
   return (
     <>
       <Navbar
@@ -28,7 +29,10 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-        <Navbar.Brand href="/"><img src="/brand_icon.png" className="brand-logo"></img>Bali Dog Finder</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src="/brand_icon.png" className="brand-logo"></img>Bali Dog
+          Finder
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -126,7 +130,7 @@ export default function Header({
                       modaltype: "lostdog",
                       location: [],
                     })
-                  : setModalShow({ show: true, modaltype: "signin" })
+                  : setPopUp(true)
               }
             >
               + Lost Dog
@@ -139,7 +143,7 @@ export default function Header({
                       modaltype: "founddog",
                       location: [],
                     })
-                  : setModalShow({ show: true, modaltype: "signin" })
+                  : setPopUp(true)
               }
             >
               + Found Dog
@@ -148,7 +152,7 @@ export default function Header({
               onClick={() =>
                 session
                   ? setModalShow({ show: true, modaltype: "adoptdog" })
-                  : setModalShow({ show: true, modaltype: "signin" })
+                  : setPopUp(true)
               }
             >
               + Dog For Adoption
@@ -160,7 +164,7 @@ export default function Header({
                 className="sign-in"
                 session={session}
                 onClick={() =>
-                  setModalShow({ show: true, modaltype: "signin" })
+                  setPopUp(true)
                 }
               >
                 Sign In
@@ -183,6 +187,7 @@ export default function Header({
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      {popUp && (<NewWindow url="/auth/signin" onUnload={() => setPopUp(false)} />)}
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -190,10 +195,6 @@ export default function Header({
         show={modalShow.show}
         onHide={onHide}
       >
-        {modalShow.modaltype == "signin" && (
-          <SignInModal onHide={onHide} setModalShow={setModalShow} />
-        )}
-
         {modalShow.modaltype == "lostdog" && (
           <LostDog
             session={session}
@@ -227,6 +228,7 @@ export default function Header({
             onHide={() => setModalShow({ show: false })}
           />
         )}
+
       </Modal>
     </>
   );
