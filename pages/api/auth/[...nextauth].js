@@ -16,6 +16,12 @@ const options = {
       session.id = user.id;
       return Promise.resolve(session);
     },
+    redirect: async (url, _) => {
+      if (url === '/auth/signin') {
+        return Promise.resolve('/auth/signin')
+      }
+      return Promise.resolve('/')
+    },
   },
 };
 
