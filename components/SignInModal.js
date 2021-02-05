@@ -8,7 +8,7 @@ export default function SignInModal({ onHide, setModalShow }) {
   return (
     <>
       {session && onHide()}
-      {!session && <iframe src="api/auth/signin/google" />}
+      <iframe src="api/auth/signin/google" />
     </>
   );
 }
