@@ -25,6 +25,6 @@ const options = {
   },
 };
 
-export default (req, res) => {
-  NextAuth(req, res, options);
+export default async (req, res) => {
+  await NextAuth(req, res, options);
 };
