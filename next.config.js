@@ -11,7 +11,8 @@ module.exports = {
     CLOUDINARY_SECRET: "CIw0FhDwX_Rm24zWUjm4APIrQdY",
     CLOUDINARY_API: "982427895672898",
     CLOUDINARY_UPLOAD: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
-    CLOUDINARY_PRESET: "okzkpnl4"
+    CLOUDINARY_PRESET: "okzkpnl4",
+    NEXTAUTH_URL= "https://balidogfinder.vercel.app/"
   },
   images: {
     domains: ["res.cloudinary.com"],
