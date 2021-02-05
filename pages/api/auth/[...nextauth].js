@@ -7,6 +7,7 @@ const options = {
     Providers.Google({
       clientId: process.env.GOOGLE_OAUTH,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET,
+      state: false
     }),
   ],
   database: process.env.MONGO_URI,
