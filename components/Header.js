@@ -28,10 +28,7 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-        <Navbar.Brand href="/">
-          <img src="/brand_icon.png" className="brand-icon" />
-          BALI DOG FINDER
-        </Navbar.Brand>
+        <Navbar.Brand href="/"><img src="/brand_icon.png" className="brand-logo"></img>Bali Dog Finder</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -129,7 +126,7 @@ export default function Header({
                       modaltype: "lostdog",
                       location: [],
                     })
-                  : signIn()
+                  : setModalShow({ show: true, modaltype: "signin" })
               }
             >
               + Lost Dog
@@ -142,14 +139,16 @@ export default function Header({
                       modaltype: "founddog",
                       location: [],
                     })
-                  : signIn()
+                  : setModalShow({ show: true, modaltype: "signin" })
               }
             >
               + Found Dog
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                setModalShow({ show: true, modaltype: "adoptdog" })
+                session
+                  ? setModalShow({ show: true, modaltype: "adoptdog" })
+                  : setModalShow({ show: true, modaltype: "signin" })
               }
             >
               + Dog For Adoption
@@ -192,10 +191,7 @@ export default function Header({
         onHide={onHide}
       >
         {modalShow.modaltype == "signin" && (
-          <SignInModal
-            onHide={onHide}
-            setModalShow={setModalShow}
-          />
+          <SignInModal onHide={onHide} setModalShow={setModalShow} />
         )}
 
         {modalShow.modaltype == "lostdog" && (

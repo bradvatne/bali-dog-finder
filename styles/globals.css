@@ -7,6 +7,13 @@ body {
   font-family: 'Montserrat', sans-serif !important;
   font-size: 1.1rem !important;
   padding-left: 16px !important;
+  font-weight: 600;
+  line-height: 10px !important;
+}
+
+.brand-logo{
+  margin-bottom: 5px;
+  margin-right: 6px;
 }
 
 .dropdown-item {
@@ -22,19 +29,19 @@ body {
 
 .nav-link {
   font-family: 'Inter', sans-serif;
-  font-size: .8rem;
+  font-size: .7rem;
   color: white !important;
   padding: 15px 10px !important;
+  text-transform: uppercase;
 }
 
 .nav-link:hover {
   font-family: 'Inter', sans-serif;
-  font-size: .8rem;
+  font-size: .7rem;
   color: #7c3aed !important;
   background-color: white !important;
   padding: 15px 10px !important;
 }
-
 
 .navbar-custom {
   background-color: #7c3aed !important;
@@ -56,6 +63,32 @@ body {
   padding-left: 26px !important;
 }
 
+#collasible-nav-dropdown-locations[aria-expanded="true"] {
+  background-color: white !important;
+  color: #7c3aed !important;
+}
+
+
+#collasible-nav-dropdown[aria-expanded="true"] {
+  background-color: white !important;
+  color: #7c3aed !important;
+}
+
+@media (max-width: 998px) {
+  .navbar-brand {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  .sign-in {
+    padding-right: 26px !important;
+    padding-left: 10px !important;
+  }
+  
+  .sign-in:hover {
+    padding-right: 26px !important;
+    padding-left: 10px !important;
+  }
+}
 
 .navbar-dark .navbar-toggler {
   border: none !important;
