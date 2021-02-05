@@ -3,6 +3,7 @@ import LostDog from "./forms/LostDog";
 import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
 import { useState } from "react";
+import SignInModal from "./SignInModal";
 
 export default function Header({
   session,
@@ -20,9 +21,16 @@ export default function Header({
   }
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        variant="dark"
+        fixed="top"
+        className="navbar-custom"
+      >
         <Navbar.Brand href="/">
-          <img className="brand-logo-img" src="./nav_logo4.png"></img>
+          <img src="/brand_icon.png" className="brand-icon" />
+          BALI DOG FINDER
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -150,18 +158,18 @@ export default function Header({
           <Nav>
             {!session && (
               <Nav.Link
-                onClick={() => {
-                  signIn();
-                }}
+                className="sign-in"
+                session={session}
+                onClick={() =>
+                  setModalShow({ show: true, modaltype: "signin" })
+                }
               >
                 Sign In
               </Nav.Link>
             )}
             {session && (
               <Nav.Link>
-                <span className="text-white">
-                  Signed in as {session.user.email}
-                </span>
+                <span className="">Signed in as {session.user.email}</span>
               </Nav.Link>
             )}
             {session && (
@@ -183,6 +191,13 @@ export default function Header({
         show={modalShow.show}
         onHide={onHide}
       >
+        {modalShow.modaltype == "signin" && (
+          <SignInModal
+            onHide={onHide}
+            setModalShow={setModalShow}
+          />
+        )}
+
         {modalShow.modaltype == "lostdog" && (
           <LostDog
             session={session}
@@ -195,6 +210,7 @@ export default function Header({
             }
           />
         )}
+
         {modalShow.modaltype == "founddog" && (
           <FoundDog
             session={session}
@@ -207,15 +223,9 @@ export default function Header({
             }
           />
         )}
+
         {modalShow.modaltype == "adoptdog" && (
           <AdoptDog
-            session={session}
-            setSelectingLocation={setSelectingLocation}
-            onHide={() => setModalShow({ show: false })}
-          />
-        )}
-        {modalShow.modaltype == "signin" && (
-          <LostDog
             session={session}
             setSelectingLocation={setSelectingLocation}
             onHide={() => setModalShow({ show: false })}

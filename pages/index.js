@@ -23,6 +23,7 @@ export default function Home(data) {
     ssr: false,
   });
 
+
   return (
     <>
       <Head>
@@ -30,6 +31,11 @@ export default function Home(data) {
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
         />
+        <link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet"/>
+      
+<link rel="preconnect" href="https://fonts.gstatic.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Montserrat:wght@300&display=swap" rel="stylesheet"/>
       </Head>
       <Header
         signIn={signIn}

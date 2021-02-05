@@ -44,9 +44,9 @@ export default function DogCard({ marker }) {
         <p className="font-weight-bold">{number}</p>
       </div>
       <div className="d-flex flex-row justify-content-between px-3 pb-3">
-        <small>Posted on {createdAt.substring(0, 10)}</small>
+        <small className="dogcard-footer">Posted on {createdAt.substring(0, 10)}</small>
         <small>
-          <a href="#" className="text-grey">
+          <a href="#" className="dogcard-footer">
             Report this post
           </a>
         </small>
