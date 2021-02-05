@@ -1,15 +1,18 @@
-import { useEffect } from 'react'
-import { signIn, useSession } from 'next-auth/client'
+import { useEffect } from "react";
+import { signIn, useSession } from "next-auth/client";
 
 const SignInPage = () => {
-  const [session, loading] = useSession()
+  const [session, loading] = useSession();
 
   useEffect(() => {
-    if (!loading && !session) void signIn()
-    if (!loading && session) window.close()
-  }, [session, loading])
+    if (!loading && !session)
+      void signIn("google", {
+        callbackUrl: "https://balidogfinder.vercel.app/auth/signin",
+      });
+    if (!loading && session) window.close();
+  }, [session, loading]);
 
-  return null
-}
+  return null;
+};
 
-export default SignInPage
+export default SignInPage;
