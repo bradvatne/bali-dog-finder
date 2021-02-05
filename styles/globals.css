@@ -17,14 +17,20 @@ body {
 }
 
 .dropdown-item {
-
   font-size: .8rem;
   color: #7c3aed !important;
+}
+
+.dropdown-item:hover {
+  color: white !important;
+  background-color: #7c3aed !important;
 }
 
 .dropdown-menu {
   border: none !important;
   border-radius: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .nav-link {
@@ -143,6 +149,18 @@ body {
 .hide-input {
     display: none;
 }
+
+.btn-dark {
+  background-color: #7c3aed !important;
+  border: 1px solid #ced4da !important;
+}
+
+.btn-dark:hover {
+  background-color: white !important;
+  color: #7c3aed !important;
+  border: 1px solid #ced4da !important;
+}
+
 
 /* SPINNER */
 .lds-spinner {
