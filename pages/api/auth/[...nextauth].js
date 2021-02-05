@@ -17,10 +17,10 @@ const options = {
       return Promise.resolve(session);
     },
     redirect: async (url, _) => {
-      if (url === '/auth/signin') {
-        return Promise.resolve('/auth/signin')
+      console.log(url)
+      if (url === '/auth/signin/') {
+        return ('/auth/signin/')
       }
-      return Promise.resolve('/')
     },
   },
 };
