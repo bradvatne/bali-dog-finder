@@ -7,7 +7,7 @@ const SignInPage = () => {
   useEffect(() => {
     if (!loading && !session)
       void signIn("google", {
-        callbackUrl: "/auth/signin/",
+        callbackUrl: "https://balidogfinder.com/auth/signin/",
       });
     if (!loading && session) window.close();
   }, [session, loading]);
