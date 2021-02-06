@@ -27,10 +27,7 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-        <Navbar.Brand href="/">
-          <img src="/brand_icon.png" className="brand-logo"></img>Bali Dog
-          Finder
-        </Navbar.Brand>
+        <Navbar.Brand href="/">Bali Dog Finder</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

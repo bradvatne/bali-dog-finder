@@ -4,11 +4,10 @@ body {
 
 /* NAVBAR */ 
 .navbar-brand {
-  font-family: 'Montserrat', sans-serif !important;
-  font-size: 1.1rem !important;
+  font-family: 'Luckiest Guy', cursive !important;
+  font-size: 2rem !important;
   padding-left: 16px !important;
-  font-weight: 600;
-  line-height: 10px !important;
+
 }
 
 .brand-logo{
@@ -37,7 +36,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: .7rem;
   color: white !important;
-  padding: 15px 10px !important;
+  padding: 30px 10px !important;
   text-transform: uppercase;
 }
 
@@ -46,7 +45,11 @@ body {
   font-size: .7rem;
   color: #7c3aed !important;
   background-color: white !important;
-  padding: 15px 10px !important;
+  padding: 30px 10px !important;
+}
+
+.leaflet-control-zoom {
+  display: none;
 }
 
 .navbar-custom {
@@ -159,6 +162,12 @@ body {
   background-color: white !important;
   color: #7c3aed !important;
   border: 1px solid #ced4da !important;
+}
+
+@media(max-width: 1005px) {
+  .hide-mobile {
+    display: none
+  }
 }
 
   /* leafelt overrides */

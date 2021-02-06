@@ -30,21 +30,39 @@ export default function Home(data) {
   return (
     <>
       <Head>
-      <title>Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali</title>
-<meta name="title" content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"/>
-<meta name="description" content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "/>
+        <title>Bali Dog Finder - Find Lost and Adoptable Dogs in Bali</title>
+        <meta
+          name="title"
+          content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"
+        />
+        <meta
+          name="description"
+          content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "
+        />
 
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://balidogfinder.com/"/>
-<meta property="og:title" content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"/>
-<meta property="og:description" content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "/>
-<meta property="og:image" content="/social.png"/>
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://balidogfinder.com/" />
+        <meta
+          property="og:title"
+          content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"
+        />
+        <meta
+          property="og:description"
+          content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "
+        />
+        <meta property="og:image" content="/social.png" />
 
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:url" content="https://balidogfinder.com/"/>
-<meta property="twitter:title" content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"/>
-<meta property="twitter:description" content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "/>
-<meta property="twitter:image" content="/social.png"/>
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://balidogfinder.com/" />
+        <meta
+          property="twitter:title"
+          content="Bali Dog Finder  - Find Lost and Adoptable Dogs in Bali"
+        />
+        <meta
+          property="twitter:description"
+          content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "
+        />
+        <meta property="twitter:image" content="/social.png" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -78,6 +96,10 @@ export default function Home(data) {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Montserrat:wght@600&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
           rel="stylesheet"
         />
       </Head>
