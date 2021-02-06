@@ -27,5 +27,8 @@ const options = {
 };
 
 export default async (req, res) => {
+  console.log('REQUEST: ', req)
+
+  console.log('REPONSE: '), res
   await NextAuth(req, res, options);
 };
