@@ -289,6 +289,12 @@ body {
 
 }
 
+.card-dogname {
+  font-family: "Luckiest Guy", cursive;
+  font-size: 2rem;
+  letter-spacing: .05em;
+}
+
 /* badges */
 
 .badge-female {
@@ -300,3 +306,4 @@ body {
     background-color: #3F00FF !important;
     color: white;
 }
+

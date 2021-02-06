@@ -37,7 +37,7 @@ export default function DogCard({ marker }) {
           <span className="badge badge-info mr-1">Vaccinated</span>
         )}
       </div>
-      <h5 className="px-3 mt-1 font-weight-bold">{dogname}</h5>
+      <h5 className="px-3 mt-1 font-weight-bold card-dogname">{dogname}</h5>
       <p className="px-3">{description}</p>
       <div className="card-contact-section px-3 my-3">
         <img src="./whatsapp-logo.png" className="whatsapp-logo" />

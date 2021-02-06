@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "boostrap": "^2.0.0",
     "bootstrap": "^4.6.0",
     "browser-image-compression": "^1.0.14",
     "leaflet": "^1.7.1",
