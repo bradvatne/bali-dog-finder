@@ -19,7 +19,7 @@ const options = {
     redirect: async (url, _) => {
       console.log(url)
       if (url === '/auth/signin/') {
-        return ('/auth/signin/')
+        return ('https://balidogfinder.com/auth/signin/')
       }
     },
   },
