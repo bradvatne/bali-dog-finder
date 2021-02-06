@@ -4,7 +4,7 @@ import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
 import { useState } from "react";
 import NewWindow from "react-new-window";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signOut, useSession } from "next-auth/client";
 
 export default function Header({
   setSelectingLocation,
@@ -17,6 +17,7 @@ export default function Header({
     setModalShow({ show: false });
   }
   const [session, loading] = useSession();
+  //Popup for sign-in window
   const [popUp, setPopUp] = useState(false);
   return (
     <>
