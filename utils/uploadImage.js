@@ -14,7 +14,7 @@ export default function uploadImage(initialFile, setImage, setImageLoading) {
     //Finally can send file to Cloudinary server
     .then((compressedFile) => {
       return axios({
-        url: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
+        url: process.env.CLOUDINARY_UPLOAD,
         method: "POST",
         headers: { "X-Requested-With": "XMLHttpRequest" },
         data: {
