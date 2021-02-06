@@ -7,7 +7,6 @@ const options = {
     Providers.Google({
       clientId: process.env.GOOGLE_OAUTH,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET,
-      state: false,
     }),
   ],
   database: process.env.MONGO_URI,
@@ -15,9 +14,6 @@ const options = {
     session: async (session, user) => {
       session.id = user.id;
       return Promise.resolve(session);
-    },
-    redirect: async () => {
-      return "/auth/signin";
     },
   },
 };
