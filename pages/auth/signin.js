@@ -8,7 +8,7 @@ const SignInPage = () => {
   useEffect(() => {
     //Currently only for google
     if (!loading && !session)
-      void signIn("google")
+      void signIn("google", { redirectUrl: "/auth/signin" });
     //Close window when complete
     if (!loading && session) window.close();
   }, [session, loading]);
