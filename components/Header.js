@@ -4,21 +4,19 @@ import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
 import { useState } from "react";
 import NewWindow from "react-new-window";
+import { useSession } from "next-auth";
 
 export default function Header({
-  session,
-  signIn,
-  signOut,
   setSelectingLocation,
   modalShow,
   setModalShow,
   setCenter,
   setMarkerFilter,
-  markerFilter,
 }) {
   function onHide() {
     setModalShow({ show: false });
   }
+  const [session, loading] = useSession;
   const [popUp, setPopUp] = useState(false);
   return (
     <>
@@ -163,9 +161,7 @@ export default function Header({
               <Nav.Link
                 className="sign-in"
                 session={session}
-                onClick={() =>
-                  setPopUp(true)
-                }
+                onClick={() => setPopUp(true)}
               >
                 Sign In
               </Nav.Link>
@@ -187,7 +183,9 @@ export default function Header({
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {popUp && (<NewWindow url="/auth/signin" onUnload={() => setPopUp(false)} />)}
+      {popUp && (
+        <NewWindow url="/auth/signin" onUnload={() => setPopUp(false)} />
+      )}
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -228,7 +226,6 @@ export default function Header({
             onHide={() => setModalShow({ show: false })}
           />
         )}
-
       </Modal>
     </>
   );
