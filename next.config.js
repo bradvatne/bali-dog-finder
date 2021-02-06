@@ -12,6 +12,7 @@ module.exports = {
     CLOUDINARY_API: "982427895672898",
     CLOUDINARY_UPLOAD: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
     CLOUDINARY_PRESET: "okzkpnl4",
+    NEXTAUTH_URL: "https://balidogfinder.com",
   },
   images: {
     domains: ["res.cloudinary.com"],
