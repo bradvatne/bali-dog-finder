@@ -187,7 +187,7 @@ export default function Header({
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {popUp && (<NewWindow url="https://balidogfinder.com/auth/signin" onUnload={() => setPopUp(false)} />)}
+      {popUp && (<NewWindow url="/auth/signin" onUnload={() => setPopUp(false)} />)}
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"

@@ -17,7 +17,7 @@ const options = {
       return Promise.resolve(session);
     },
     redirect: async () => {
-      return "https://balidogfinder.com/auth/signin/";
+      return "/auth/signin";
     },
   },
 };
