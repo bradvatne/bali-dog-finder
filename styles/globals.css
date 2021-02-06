@@ -99,6 +99,10 @@ body {
     padding-right: 26px !important;
     padding-left: 10px !important;
   }
+
+  .navbrand-header {
+    max-height: 30px;
+  }
 }
 
 /* Modal */
