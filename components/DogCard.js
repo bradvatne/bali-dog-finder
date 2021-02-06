@@ -29,7 +29,7 @@ export default function DogCard({ marker }) {
         <span className={gender ? "badge mr-1 badge-female" : "badge mr-1 badge-primary"}>
           {gender ? "Female" : "Male"}
         </span>
-        <span className="badge badge-secondary mr-1">{size}-Size</span>
+        <span className="badge badge-secondary mr-1">{size}-Breed</span>
         {sterilized && (
           <span className="badge badge-success mr-1">Sterilized</span>
         )}
