@@ -7,7 +7,7 @@ const options = {
     Providers.Google({
       clientId: process.env.GOOGLE_OAUTH,
       clientSecret: process.env.GOOGLE_OAUTH_SECRET,
-      state: false
+      state: false,
     }),
   ],
   database: process.env.MONGO_URI,
@@ -16,8 +16,8 @@ const options = {
       session.id = user.id;
       return Promise.resolve(session);
     },
-    redirect: async (url, _) => {
-        return Promise.resolve('https://balidogfinder.com/auth/signin/')
+    redirect: async () => {
+      return "https://balidogfinder.com/auth/signin/";
     },
   },
 };
