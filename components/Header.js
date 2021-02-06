@@ -4,7 +4,7 @@ import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
 import { useState } from "react";
 import NewWindow from "react-new-window";
-import { useSession } from "next-auth";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function Header({
   setSelectingLocation,
