@@ -20,7 +20,7 @@ const options = {
       return Promise.resolve(session);
     },
     redirect: async (url) => {
-      console.log('url param recieved': url);
+      console.log('url param recieved: ', url);
       return '/auth/signin'
     }
   },
