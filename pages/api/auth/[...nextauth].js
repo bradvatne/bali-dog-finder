@@ -17,8 +17,9 @@ const options = {
       return Promise.resolve(session);
     },
     redirect: async (url, _) => {
-      console.log(url)
+      console.log('THIS IS THE URL', url)
       if (url === '/auth/signin/') {
+        console.log("RETURNING URL: https://balidogfinder.com/auth/signin/")
         return ('https://balidogfinder.com/auth/signin/')
       }
     },
