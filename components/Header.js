@@ -16,7 +16,7 @@ export default function Header({
   function onHide() {
     setModalShow({ show: false });
   }
-  const [session, loading] = useSession;
+  const [session, loading] = useSession();
   const [popUp, setPopUp] = useState(false);
   return (
     <>
