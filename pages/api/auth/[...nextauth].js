@@ -17,18 +17,11 @@ const options = {
       return Promise.resolve(session);
     },
     redirect: async (url, _) => {
-      console.log('THIS IS THE URL', url)
-      if (url === '/auth/signin/') {
-        console.log("RETURNING URL: https://balidogfinder.com/auth/signin/")
-        return ('https://balidogfinder.com/auth/signin/')
-      }
+        return Promise.resolve('https://balidogfinder.com/auth/signin/')
     },
   },
 };
 
 export default async (req, res) => {
-  console.log('REQUEST: ', req)
-
-  console.log('REPONSE: '), res
   await NextAuth(req, res, options);
 };
