@@ -100,8 +100,20 @@ body {
     padding-left: 10px !important;
   }
 
+  .navbar-brand {
+    padding-bottom: 10px !important;
+    margin-right: 0px !important;
+    padding-top: 15px !important;
+  }
+
   .navbrand-header {
-    max-height: 30px;
+    width: 280px;
+    height: 40px !important;
+  }
+
+  .navbrand-header:hover {
+    width: 280px;
+    height: 40px !important;
   }
 }
 
