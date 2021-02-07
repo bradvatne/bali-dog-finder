@@ -110,7 +110,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
         <Form onSubmit={handleSubmit}>
           <Form.Group
             controlid="formGroupDogName"
-            className="h-100"
+            className="h-100 m-0"
           >
             <div className="flex-form">
               <Form.Label className="custom-label">
