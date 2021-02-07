@@ -140,11 +140,23 @@ body {
     padding-left: 10px !important;
   }
 
-  .navbrand-header {
-    max-height: 35px;
-  }
   .navbar-brand {
     padding-bottom: 0px !important;
+  }
+
+  .navbrand-header {
+    width: 280px;
+    height: 40px !important;
+  }
+  .nav-link:hover {
+    transform: none;
+  }
+  #collasible-nav-dropdown-locations[aria-expanded="true"] {
+    transform: none;
+  }
+  
+  #collasible-nav-dropdown[aria-expanded="true"] {
+    transform: none;
   }
 }
 
@@ -196,7 +208,7 @@ body {
     transform: none;
   }
   .angled-container {
-    transform: none;
+    transform: none !important;
   }
 }
 
