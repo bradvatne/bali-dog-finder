@@ -28,7 +28,9 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-        <Navbar.Brand href="/"><img src="/balidogfinder_logo.png" className="navbrand-header"/></Navbar.Brand>
+               <Navbar.Brand href="/">
+          <div className="navbrand-header" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
