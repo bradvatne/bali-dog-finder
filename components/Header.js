@@ -28,7 +28,9 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-        <Navbar.Brand href="/"><img src="/balidogfinder_logo.png" className="navbrand-header"/></Navbar.Brand>
+        <Navbar.Brand href="/">
+          <div className="navbrand-header" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -165,12 +167,13 @@ export default function Header({
               </Nav.Link>
             )}
             {session && (
-              <Nav.Link>
-                <span className="">Signed in as {session.user.email}</span>
+              <Nav.Link className="noskew">
+                Signed in as {session.user.email}
               </Nav.Link>
             )}
             {session && (
               <Nav.Link
+              className="noskew"
                 onClick={() => {
                   signOut();
                 }}

@@ -17,6 +17,7 @@ body {
 .dropdown-item {
   font-size: 0.8rem;
   color: #7c3aed !important;
+  transform: skew(-10deg);
 }
 
 .dropdown-item:hover {
@@ -29,6 +30,7 @@ body {
   border-radius: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+  left: -10px !important;
 }
 
 .nav-link {
@@ -39,12 +41,33 @@ body {
   text-transform: uppercase;
 }
 
+.unskew {
+  transform: skew(15deg);
+  margin: 0;
+  padding: 0;
+}
+
+.noskew {
+  transform: none !important;
+}
+
+.dropdown-menu {
+  transform: none;
+  left: -20px;
+}
+
+.dropdown-item {
+  transform: none;
+  text-transform: uppercase;
+}
+
 .nav-link:hover {
   font-family: "Inter", sans-serif;
   font-size: 0.7rem;
   color: #7c3aed !important;
   background-color: white !important;
   padding: 30px 10px !important;
+  transform: skew(-15deg);
 }
 
 .navbar-custom {
@@ -60,6 +83,7 @@ body {
 .sign-in {
   padding-right: 26px !important;
   padding-left: 26px !important;
+  transform: none !important;
 }
 
 .sign-in:hover {
@@ -70,11 +94,13 @@ body {
 #collasible-nav-dropdown-locations[aria-expanded="true"] {
   background-color: white !important;
   color: #7c3aed !important;
+  transform: skew(-15deg);
 }
 
 #collasible-nav-dropdown[aria-expanded="true"] {
   background-color: white !important;
   color: #7c3aed !important;
+  transform: skew(-15deg);
 }
 
 .navbar-dark .navbar-toggler-icon {
@@ -84,6 +110,22 @@ body {
 
 .navbar-dark .navbar-toggler {
   border: none !important;
+}
+
+.navbrand-header {
+  background: url("/balidogfinder_logo.png");
+  height: 50px;
+  width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.navbrand-header:hover {
+  background: url("/balidogfinder_logo_reverse.png");
+  height: 50px;
+  width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* Fix Mobile Nav */
