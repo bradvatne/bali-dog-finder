@@ -235,6 +235,10 @@ body {
   align-self: flex-end;
 }
 
+.next-button {
+  cursor: pointer;
+}
+
 .step-label {
   font-size: 1.5rem !important;
 }

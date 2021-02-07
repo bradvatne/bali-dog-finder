@@ -46,6 +46,12 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
         ? Number(localStorage.getItem("lng"))
         : "",
   });
+  const [step, setStep] = useState(1);
+
+  const stepOne = () => {
+    localStorage.setItem("dogname", dogname);
+    setStep(2);
+  };
 
   //Closes modal, saves state to local storage, changes selectLocation to true
   const handleSelectLocation = () => {
@@ -108,34 +114,36 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
     <>
       <Modal.Body controlid="dogname">
         <Form onSubmit={handleSubmit}>
-          <Form.Group
-            controlid="formGroupDogName"
-            className="h-100 m-0"
-          >
-            <div className="flex-form">
-              <Form.Label className="custom-label">
-                What is your doggo's name?
-              </Form.Label>
-              <div className="angled-container">
-                <Form.Control
-                  required
-                  maxLength={20}
-                  type="text"
-                  autofocus="autofocus"
-                  onChange={(e) => setDogname(e.target.value)}
-                  defaultValue={dogname}
-                />
-              </div>
-              <div className="d-flex flex-row justify-content-between">
-                <div className="custom-label step-label">
-                    1/4
+          {step == 1 && (
+            <Form.Group controlid="formGroupDogName" className="h-100 m-0">
+              <div className="flex-form">
+                <Form.Label className="custom-label">
+                  What is your doggo's name?
+                </Form.Label>
+                <div className="angled-container">
+                  <Form.Control
+                    required
+                    maxLength={20}
+                    type="text"
+                    autofocus="autofocus"
+                    onChange={(e) => setDogname(e.target.value)}
+                    defaultValue={dogname}
+                  />
                 </div>
-                <div>
-                <img src="/next.png" className="next-button" />
+                <div className="d-flex flex-row justify-content-between">
+                  <div className="custom-label step-label">1/4</div>
+                  <div>
+                    <img
+                      src="/next.png"
+                      className="next-button"
+                      onClick={() => stepOne()}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            </div>
-          </Form.Group>
+            </Form.Group>
+          )}
+          {step == 2 && <div>2nd step</div>}
         </Form>
       </Modal.Body>
     </>
