@@ -47,7 +47,6 @@ body {
   padding: 30px 10px !important;
 }
 
-
 .navbar-custom {
   background-color: #7c3aed !important;
   -webkit-box-shadow: 0px 12px 15px -8px rgba(0, 0, 0, 0.37);
@@ -87,7 +86,6 @@ body {
   border: none !important;
 }
 
-
 /* Fix Mobile Nav */
 @media (max-width: 998px) {
   .sign-in {
@@ -106,6 +104,89 @@ body {
 }
 
 /* Modal */
+
+.modal-dialog {
+  transform: skew(-5deg, -5deg);
+}
+
+.modal-content {
+  background-color: #7c3aed !important;
+  transform: skew(-10deg);
+  border: 1px solid black !important;
+  box-shadow: 0px 13px 15px 1px rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  transform: skew(10deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+@media (max-width: 776px) {
+  .modal-content {
+
+    transform: none;
+
+  }
+  
+  .modal-body {
+    transform: none;
+
+  }
+}
+
+.custom-label {
+  font-family: "Luckiest Guy", sans-serif;
+  color: white;
+  font-size: 3rem;
+  letter-spacing: 0.08rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin: 0;
+}
+
+.form-control {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: black !important;
+  text-align: left;
+  transform: skew(10deg);
+}
+
+.angled-container {
+  transform: skew(-10deg);
+  background-color: white;
+  border: 1px solid black;
+  width: 100%;
+
+}
+
+.flex-form {
+  height: 250px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+}
+
+.form-control:active {
+  border: none;
+}
+
+.next-button {
+  color: white !important;
+  max-height: 35px;
+  align-self: flex-end;
+}
+
+.step-label {
+  font-size: 1.5rem !important
+}
 
 .modal-header .close {
   display: none !important;
@@ -174,7 +255,6 @@ body {
 .leaflet-control-zoom {
   display: none;
 }
-
 
 .leaflet-container {
   height: 100vh;

@@ -1,6 +1,6 @@
 import { Form, Modal, Button, InputGroup } from "react-bootstrap";
 import { useState } from "react";
-import uploadImage from "./../../utils/uploadImage";
+import uploadImage from "../../utils/uploadImage";
 
 export default function LostDog({ onHide, session, setSelectingLocation }) {
   //Form state fields will be filled by localstorage values (for re-rendering modal after location selection)
@@ -29,7 +29,9 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
       : null
   );
   const [size, setSize] = useState(
-    localStorage.getItem("size") != "null" ? localStorage.getItem("size") : null
+    localStorage.getItem("size") != "null"
+      ? localStorage.getItem("size")
+      : null
   );
   const [image, setImage] = useState(
     localStorage.getItem("imageurl") != "null"
@@ -88,11 +90,11 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
         localStorage.clear();
         window.location.reload(true);
       } else {
-        console.log(res);
+        console.log(res)
         alert("Sorry, something went wrong.");
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
       alert("Sorry, something went wrong.");
     }
   }
@@ -106,43 +108,142 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
   //Render
   return (
     <>
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+        Can't find your furry friend?
+        </Modal.Title>
+      </Modal.Header>
+
       <Modal.Body controlid="dogname">
         <Form onSubmit={handleSubmit}>
-          <Form.Group
-            controlid="formGroupDogName"
-            className="h-100"
-          >
-            <div className="flex-form">
-              <Form.Label className="custom-label">
-                What is your doggo's name?
-              </Form.Label>
-              <div className="angled-container">
-                <Form.Control
-                  required
-                  maxLength={20}
-                  type="text"
-                  autofocus="autofocus"
-                  onChange={(e) => setDogname(e.target.value)}
-                  defaultValue={dogname}
-                />
-              </div>
-              <div className="d-flex flex-row justify-content-between">
-                <div className="custom-label step-label">
-                    1/4
-                </div>
-                <div>
-                <img src="/next.png" className="next-button" />
-              </div>
-            </div>
-            </div>
+          <Form.Group controlid="formGroupEmail">
+            <Form.Label>Dog's Name:</Form.Label>
+            <Form.Control
+              required
+              maxLength={20}
+              type="text"
+              placeholder="Enter dog's name"
+              onChange={(e) => setDogname(e.target.value)}
+              defaultValue={dogname}
+            />
           </Form.Group>
+
+          <Form.Group controlid="description">
+            <Form.Label>Description of Dog:</Form.Label>
+            <Form.Control
+              required
+              maxLength={500}
+              as="textarea"
+              rows={4}
+              placeholder="Describe your lost dog and it's location"
+              onChange={(e) => setDescription(e.target.value)}
+              defaultValue={description}
+            />
+          </Form.Group>
+
+          <Form.Group controlid="formGroupEmail">
+            <Form.Label>WhatsApp Number</Form.Label>
+            <Form.Control
+              required
+              maxLength={15}
+              type="text"
+              placeholder="+62 123 456 7890 (please include country code)"
+              onChange={(e) => setNumber(e.target.value)}
+              defaultValue={number}
+            />
+          </Form.Group>
+
+          <Form.Group controlid="gender">
+            <Form.Control
+              required
+              as="select"
+              onChange={(e) => setGender(e.target.value)}
+              defaultValue={gender}
+            >
+              <option>Select Gender...</option>
+              <option value={true}>Female</option>
+              <option value={false}>Male</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group controlid="size">
+            <Form.Control
+              required
+              as="select"
+              onChange={(e) => setSize(e.target.value)}
+              defaultValue={size}
+            >
+              <option>Select Size...</option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+            </Form.Control>
+          </Form.Group>
+
+          <InputGroup controlid="image">
+            {!image && (
+              <label  className={imageLoading ? "hide-input" : "form-control text-center"}>
+                Click here to upload your photo
+              <input
+                type="file"
+                onChange={(e) => uploadImage(e.target.files[0], setImage, setImageLoading, imageLoading)}
+                accept="image/*"
+                className={imageLoading ? " " : "hide-input"
+                }
+              />
+              </label>
+            )}
+             {imageLoading && <img src="./spinner.gif"/>} 
+            {image && (
+              <>
+                <Form.Label className="form-control text-center">Image Succesfully Uploaded!</Form.Label>
+
+              </>
+            )}
+          </InputGroup>
+
+          <Form.Group controlid="location">
+            <>
+              <div className="d-flex flex-row mt-2">
+                <Button
+                  variant="dark"
+                  className="w-100 "
+                  onClick={handleSelectLocation}
+                >
+                  {location.lat != 0
+                    ? "Select New Location"
+                    : "Click Here to Select Location on Map"}
+                </Button>
+              </div>
+            </>
+          </Form.Group>
+
+          <Modal.Footer>
+            <Button
+              type="submit"
+              disabled={
+                !image ||
+                !location.lat ||
+                !location.lng ||
+                !dogname ||
+                !description
+              }
+            >
+              Submit
+            </Button>
+
+            <Button variant="danger" onClick={cancel}>
+              Cancel
+            </Button>
+          </Modal.Footer>
         </Form>
       </Modal.Body>
     </>
   );
 }
 
-/**
+
+  /**
   USE CURRENT LOCATION
             function getCurrentLocation() {
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -186,3 +287,4 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
               Test State
             </Button>
  */
+
