@@ -9,11 +9,6 @@ body {
   padding-left: 16px !important;
 }
 
-.brand-logo {
-  margin-bottom: 5px;
-  margin-right: 6px;
-}
-
 .dropdown-item {
   font-size: 0.8rem;
   color: #7c3aed !important;
@@ -108,12 +103,6 @@ body {
   background-size: contain;
 }
 
-.navbar-dark .navbar-toggler-icon:hover {
-  background-image: url("/menu-icon-blue.png") !important;
-  background-size: contain;
-}
-
-
 .navbar-dark .navbar-toggler {
   border: none !important;
 }
@@ -147,8 +136,9 @@ body {
   }
 
   .navbar-brand {
-    padding-bottom: 0px !important;
+    padding-bottom: 10px !important;
     margin-right: 0px !important;
+    padding-top: 15px !important;
   }
 
   .navbrand-header {
@@ -437,8 +427,4 @@ body {
 .leaflet-oldie .leaflet-popup-content-wrapper,
 .leaflet-oldie .leaflet-popup-tip {
   border: 1px solid #999;
-}
-
-.brand-logo-img {
-  max-height: 21px;
 }

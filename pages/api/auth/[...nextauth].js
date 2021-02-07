@@ -15,19 +15,15 @@ const options = {
   callbacks: {
     //Set id so it can be accessed from the session
     session: async (session, user) => {
-      console.log('session callback triggered')
       session.id = user.id;
       return Promise.resolve(session);
     },
     redirect: async (url) => {
-      console.log('url param recieved: ', url);
       return '/auth/signin'
     }
   },
 };
 
 export default async (req, res) => {
-  console.log('request: ', req)
-  console.log('response: ', res)
   await NextAuth(req, res, options);
 };
