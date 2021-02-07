@@ -3,15 +3,24 @@ body {
 }
 
 /* NAVBAR */
+
 .navbar-brand {
-  font-family: "Luckiest Guy", cursive !important;
-  font-size: 2rem !important;
-  padding-left: 16px !important;
+  padding-left: 16px;
+}
+.navbrand-header {
+  background: url("/balidogfinder_logo.png");
+  height: 50px;
+  width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.brand-logo {
-  margin-bottom: 5px;
-  margin-right: 6px;
+.navbrand-header:hover {
+  background: url("/balidogfinder_logo_reverse.png");
+  height: 50px;
+  width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .dropdown-item {
