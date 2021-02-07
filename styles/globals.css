@@ -12,7 +12,6 @@ body {
 .dropdown-item {
   font-size: 0.8rem;
   color: #7c3aed !important;
-  transform: skew(-10deg);
 }
 
 .dropdown-item:hover {
@@ -25,7 +24,6 @@ body {
   border-radius: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  left: -10px !important;
 }
 
 .nav-link {
@@ -37,7 +35,6 @@ body {
 }
 
 .unskew {
-  transform: skew(15deg);
   margin: 0;
   padding: 0;
 }
@@ -46,15 +43,7 @@ body {
   transform: none !important;
 }
 
-.dropdown-menu {
-  transform: none;
-  left: -20px;
-}
 
-.dropdown-item {
-  transform: none;
-  text-transform: uppercase;
-}
 
 .nav-link:hover {
   font-family: "Inter", sans-serif;
@@ -62,7 +51,6 @@ body {
   color: #7c3aed !important;
   background-color: white !important;
   padding: 30px 10px !important;
-  transform: skew(-15deg);
 }
 
 .navbar-custom {
@@ -89,13 +77,11 @@ body {
 #collasible-nav-dropdown-locations[aria-expanded="true"] {
   background-color: white !important;
   color: #7c3aed !important;
-  transform: skew(-15deg);
 }
 
 #collasible-nav-dropdown[aria-expanded="true"] {
   background-color: white !important;
   color: #7c3aed !important;
-  transform: skew(-15deg);
 }
 
 .navbar-dark .navbar-toggler-icon {
@@ -160,6 +146,17 @@ body {
   #collasible-nav-dropdown[aria-expanded="true"] {
     transform: none;
   }
+  .form-control {
+    transform: none !important;
+  }
+
+  .custom-label {
+    line-height: 3rem;
+  }
+  .gender {
+    padding: 25px !important;
+    font-size: 1rem !important;
+  }
 }
 
 /* Modal */
@@ -178,7 +175,6 @@ body {
 .modal-body {
   transform: skew(10deg);
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -188,14 +184,64 @@ body {
 .custom-label {
   font-family: "Luckiest Guy", sans-serif;
   color: white;
-  font-size: 3rem;
+  font-size: 2.5rem;
   letter-spacing: 0.08rem;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
   margin: 0;
 }
 
-@media (max-width: 776px) {
+
+.gender {
+  font-family: "Luckiest Guy", sans-serif;
+  color: white;
+  font-size: 3rem;
+  letter-spacing: 0.08rem;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin: 0;
+  padding: 50px;
+}
+
+.gender-male:hover {
+  color: #0088ff;
+  cursor: pointer;
+}
+
+.gender-male-active {
+  color: #0088ff;
+}
+
+.gender-female-active {
+  color: #ff577f;
+}
+
+.gender-female:hover {
+  color: #ff577f;
+  cursor: pointer;
+}
+
+.img-upload-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.img-upload-container:hover {
+  cursor: pointer;
+}
+
+.hover-click:hover {
+  cursor: pointer;
+}
+
+.location-img {
+  max-height: 75px;
+}
+
+
+
+@media (max-width: 574px) {
   .custom-label {
     font-size: 2rem;
     line-height: 1.8rem;
@@ -211,6 +257,7 @@ body {
   }
   .angled-container {
     transform: none !important;
+
   }
 }
 
@@ -222,6 +269,7 @@ body {
   color: black !important;
   text-align: left;
   transform: skew(10deg);
+  resize: none;
 }
 
 .angled-container {
@@ -229,15 +277,19 @@ body {
   background-color: white;
   border: 1px solid black;
   width: 100%;
+
 }
 
 .flex-form {
   height: 250px;
+  max-width: 100%;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   padding: 16px;
+  padding-right: 32px;
 }
+
 
 .form-control:active {
   border: none;

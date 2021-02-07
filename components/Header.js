@@ -14,7 +14,7 @@ export default function Header({
   setMarkerFilter,
 }) {
   function onHide() {
-    setModalShow({ show: false });
+    setModalShow('none');
   }
   const [session, loading] = useSession();
   //Popup for sign-in window
@@ -169,16 +169,6 @@ export default function Header({
             {session && (
               <Nav.Link className="noskew">
                 Signed in as {session.user.email}
-              </Nav.Link>
-            )}
-            {session && (
-              <Nav.Link
-              className="noskew"
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                Sign Out
               </Nav.Link>
             )}
           </Nav>

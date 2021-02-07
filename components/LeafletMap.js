@@ -28,9 +28,11 @@ export default function LeafletMap({
       click(e) {
         localStorage.setItem("lat", e.latlng.lat.toString());
         localStorage.setItem("lng", e.latlng.lng.toString());
+        localStorage.setItem("step", 4);
         setModalShow({
           show: true,
           modaltype: localStorage.getItem("modaltype"),
+          modalStep: 4
         });
 
         setSelectingLocation(false);
