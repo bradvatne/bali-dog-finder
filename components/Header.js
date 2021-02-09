@@ -137,25 +137,27 @@ export default function Header({
             </Nav.Link>
             <Nav.Link
               onClick={() =>
-                session
-                  ? setModalShow({
-                      show: true,
-                      modaltype: "founddog",
-                      location: [],
-                    })
-                  : setPopUp(true)
+                setModalShow({
+                  show: true,
+                  modaltype: session ? "founddog" : "signin",
+                  nextmodal: !session && "founddog",
+                  location: [],
+                })
               }
             >
               + Found Dog
             </Nav.Link>
             <Nav.Link
-              onClick={() =>
-                session
-                  ? setModalShow({ show: true, modaltype: "adoptdog" })
-                  : setPopUp(true)
-              }
-            >
-              + Dog For Adoption
+                            onClick={() =>
+                              setModalShow({
+                                show: true,
+                                modaltype: session ? "adoptdog" : "signin",
+                                nextmodal: !session && "adoptdog",
+                                location: [],
+                              })
+                            }
+                          >
+                            + Adopt Dog
             </Nav.Link>
           </Nav>
           <Nav>
@@ -163,9 +165,15 @@ export default function Header({
               <Nav.Link
                 className="sign-in"
                 session={session}
-                onClick={() => setPopUp(true)}
-              >
-                Sign In
+                onClick={() =>
+                  setModalShow({
+                    show: true,
+                    modaltype: session ? "" : "signin",
+                    nextmodal: !session && "",
+                    location: [],
+                  })
+                }
+              >Sign In
               </Nav.Link>
             )}
             {session && (

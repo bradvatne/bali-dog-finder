@@ -53,7 +53,7 @@ export default function ChooseLogin({
       )}
       {session &&
         setModalShow({
-          show: true,
+          show: modalShow.nextmodal ? true : false,
           modaltype: modalShow.nextmodal,
         })}
     </>
