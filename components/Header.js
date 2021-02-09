@@ -2,6 +2,7 @@ import { Navbar, Nav, NavDropdown, Modal, Button } from "react-bootstrap";
 import LostDog from "./forms/LostDog";
 import FoundDog from "./forms/FoundDog";
 import AdoptDog from "./forms/AdoptDog";
+import ChooseLogin from "./forms/ChooseLogin";
 import { useState } from "react";
 import NewWindow from "react-new-window";
 import { signOut, useSession } from "next-auth/client";
@@ -12,6 +13,7 @@ export default function Header({
   setModalShow,
   setCenter,
   setMarkerFilter,
+  setGuest
 }) {
   function onHide() {
     setModalShow({ show: false });
@@ -19,6 +21,7 @@ export default function Header({
   const [session, loading] = useSession();
   //Popup for sign-in window
   const [popUp, setPopUp] = useState(false);
+  const [facebookPopUp, setFacebookPopUp] = useState(false);
   return (
     <>
       <Navbar
@@ -28,7 +31,7 @@ export default function Header({
         fixed="top"
         className="navbar-custom"
       >
-               <Navbar.Brand href="/">
+        <Navbar.Brand href="/">
           <div className="navbrand-header" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -122,13 +125,12 @@ export default function Header({
             </NavDropdown>
             <Nav.Link
               onClick={() =>
-                session
-                  ? setModalShow({
-                      show: true,
-                      modaltype: "lostdog",
-                      location: [],
-                    })
-                  : setPopUp(true)
+                setModalShow({
+                  show: true,
+                  modaltype: session ? "lostdog" : "signin",
+                  nextmodal: !session && "lostdog",
+                  location: [],
+                })
               }
             >
               + Lost Dog
@@ -186,6 +188,13 @@ export default function Header({
       {popUp && (
         <NewWindow url="/auth/signin" onUnload={() => setPopUp(false)} />
       )}
+
+      {facebookPopUp && (
+        <NewWindow
+          url="/auth/signinfacebook"
+          onUnload={() => setFacebookPopUp(false)}
+        />
+      )}
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -193,6 +202,23 @@ export default function Header({
         show={modalShow.show}
         onHide={onHide}
       >
+        {modalShow.modaltype == "signin" && (
+          <ChooseLogin
+            session={session}
+            modalShow={modalShow}
+            setModalShow={setModalShow}
+            onHide={() =>
+              setModalShow({
+                show: false,
+                modaltype: modalShow.nextmodal,
+              })
+            }
+            setPopUp={setPopUp}
+            setFacebookPopUp={setFacebookPopUp}
+            modalShow={modalShow}
+            setGuest={setGuest}
+          />
+        )}
         {modalShow.modaltype == "lostdog" && (
           <LostDog
             session={session}

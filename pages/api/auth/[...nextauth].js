@@ -10,6 +10,11 @@ const options = {
       clientSecret: process.env.GOOGLE_OAUTH_SECRET,
       state: false
     }),
+    Providers.Facebook({
+      clientId: process.env.FACEBOOK_APPID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+      state: false
+    }),
   ],
   //Stores values to database automatically
   database: process.env.MONGO_URI,

@@ -7,8 +7,11 @@ import dynamic from "next/dynamic";
 import Header from "../components/Header";
 
 export default function Home(data) {
-  //Next Auth Session, passed to Form
+  //Gues login
+  const [guest, setGuest] = useState(false);
+  //Next Auth Session
   const [session, loading] = useSession();
+
   //Map Center (used for selecting location)
   const [center, setCenter] = useState({ lat: -8.6, long: 115.2126, zoom: 12 });
   //Marker filters
@@ -113,6 +116,7 @@ export default function Home(data) {
         setCenter={setCenter}
         setMarkerFilter={setMarkerFilter}
         markerFilter={markerFilter}
+        setGuest={setGuest}
       />
 
       <div className="leaflet-container">

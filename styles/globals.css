@@ -2,6 +2,10 @@ body {
   font-family: "Inter", sans-serif !important;
 }
 
+small {
+  font-size: .7em !important;
+}
+
 /* NAVBAR */
 
 .navbar-brand {
@@ -149,6 +153,45 @@ body {
   background-color: white !important;
   color: #7c3aed !important;
   border: 1px solid #ced4da !important;
+}
+
+.social-login {
+  background-color: #7c3aed !important;
+  border: 1px solid #ced4da !important;
+  width: 50%;
+  margin-bottom: 10px;
+  display: flex !important;
+  justify-content: center;
+}
+
+.social-login:hover {
+  background-color: white !important;
+  color: #7c3aed !important;
+  border: 1px solid #ced4da !important;
+  margin-bottom: 10px;
+  width: 50%
+}
+
+.bg-facebook {
+  background-color: #545ceb !important;
+}
+
+.bg-google {
+  background-color: #dd4b39 !important;
+}
+
+
+
+@media(max-width: 767px) {
+  .social-login {
+    width: 100%
+  }
+  
+  .social-login:hover {
+    width: 100%
+  }
+
+
 }
 
 /* Popup Card */

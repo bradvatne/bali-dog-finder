@@ -13,6 +13,8 @@ module.exports = {
     CLOUDINARY_UPLOAD: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
     CLOUDINARY_PRESET: "okzkpnl4",
     NEXTAUTH_URL: "https://balidogfinder.com",
+    FACEBOOK_APPID: "1433490780341675",
+    FACEBOOK_SECRET: "c95f3bb5184b57cbc21bb59bfce5e381"
   },
   images: {
     domains: ["res.cloudinary.com"],
