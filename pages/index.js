@@ -53,7 +53,7 @@ export default function Home(data) {
           property="og:description"
           content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "
         />
-        <meta property="og:image" content="/social.png" />
+        <meta property="og:image" content="https://balidogfinder.com/social.png" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://balidogfinder.com/" />
@@ -65,7 +65,7 @@ export default function Home(data) {
           property="twitter:description"
           content="Search for your lost doggo, help others find their furry friends, and arrange adoptions easily with our map-based interface.  No sales. No bounties. Non-profit. "
         />
-        <meta property="twitter:image" content="/social.png" />
+        <meta property="twitter:image" content="https://balidogfinder.com/social.png" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
