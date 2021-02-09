@@ -33,7 +33,7 @@ Create a .env.local file within the root folder and add variables for API secret
 npm run dev
 ```
 ### 🚀 Changelog
-  ####v1.01 2021-02-09
+  **v1.01 2021-02-09**
   - Add Guest login feature
   - Add Facebook login
   - Add modal with login options
