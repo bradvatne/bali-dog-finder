@@ -1,9 +1,10 @@
 import { Modal, Button } from "react-bootstrap";
-import { useSession } from "next-auth/client";
+import { useSession, signIn } from "next-auth/client";
 
 export default function ChooseLogin({
   setPopUp,
   setFacebookPopUp,
+  setGuestPopUp,
   modalShow,
   setModalShow,
 }) {
@@ -38,11 +39,20 @@ export default function ChooseLogin({
             >
               Sign in with Google
             </Button>
+            <Button 
+              className="social-login btn-dark"
+              onClick={() => {
+                localStorage.setItem("provider", "credentials");
+                setGuestPopUp(true);
+              }}
+            >
+              Continue as Guest
+            </Button>
           </Modal.Body>
 
           <Modal.Footer className="justify-content-center">
             <small>
-              By using social login, we only verify your account with the
+              Social login only verifies your account with the
               provider. We will never get access to your password. Read more at{" "}
               <a href="https://oauth.net/2/" target="_blank">
                 oAuth2.

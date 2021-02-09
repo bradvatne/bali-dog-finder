@@ -13,7 +13,7 @@ export default function Header({
   setModalShow,
   setCenter,
   setMarkerFilter,
-  setGuest
+  setGuest,
 }) {
   function onHide() {
     setModalShow({ show: false });
@@ -22,6 +22,7 @@ export default function Header({
   //Popup for sign-in window
   const [popUp, setPopUp] = useState(false);
   const [facebookPopUp, setFacebookPopUp] = useState(false);
+  const [guestPopUp, setGuestPopUp] = useState(false);
   return (
     <>
       <Navbar
@@ -148,16 +149,16 @@ export default function Header({
               + Found Dog
             </Nav.Link>
             <Nav.Link
-                            onClick={() =>
-                              setModalShow({
-                                show: true,
-                                modaltype: session ? "adoptdog" : "signin",
-                                nextmodal: !session && "adoptdog",
-                                location: [],
-                              })
-                            }
-                          >
-                            + Adopt Dog
+              onClick={() =>
+                setModalShow({
+                  show: true,
+                  modaltype: session ? "adoptdog" : "signin",
+                  nextmodal: !session && "adoptdog",
+                  location: [],
+                })
+              }
+            >
+              + Adopt Dog
             </Nav.Link>
           </Nav>
           <Nav>
@@ -173,7 +174,8 @@ export default function Header({
                     location: [],
                   })
                 }
-              >Sign In
+              >
+                Sign In
               </Nav.Link>
             )}
             {session && (
@@ -203,6 +205,13 @@ export default function Header({
           onUnload={() => setFacebookPopUp(false)}
         />
       )}
+
+      {guestPopUp && (
+        <NewWindow
+          url="/auth/signinguest"
+          onUnload={() => setGuestPopUp(false)}
+        />
+      )}
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -223,6 +232,7 @@ export default function Header({
             }
             setPopUp={setPopUp}
             setFacebookPopUp={setFacebookPopUp}
+            setGuestPopUp={setGuestPopUp}
             modalShow={modalShow}
             setGuest={setGuest}
           />

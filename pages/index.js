@@ -143,11 +143,11 @@ export async function getServerSideProps(context) {
   try {
     data = await MarkerData.find({});
   } catch (err) {
-    console.log("error");
+    console.log(err);
   }
 
   //Little trick to convert non-serializable fields (like objectID) into JSON (throws error otherwise)
-  data = JSON.parse(JSON.stringify(data));
+  if (data) data = JSON.parse(JSON.stringify(data));
 
   return {
     props: {

@@ -65,7 +65,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
   //Form Submit Logic
   async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log('SESSSSSSSSSSSSSIOONN HERRREEE', session);
     try {
       const res = await fetch("./api/markers", {
         method: "post",
@@ -82,7 +82,7 @@ export default function LostDog({ onHide, session, setSelectingLocation }) {
           long: location.lng,
           imageurl: image,
           number: number,
-          user: session.id,
+          user: session.id ? session.id : 'guest',
         }),
       });
       if (res.status === 201) {

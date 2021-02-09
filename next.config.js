@@ -8,13 +8,12 @@ module.exports = {
     GOOGLE_OAUTH_SECRET: "n2QcZQC_XjVPKr_3VabDj7ca",
     CLOUDINARY_URL:
       "cloudinary://982427895672898:CIw0FhDwX_Rm24zWUjm4APIrQdY@ddkclruno",
-    CLOUDINARY_SECRET: "CIw0FhDwX_Rm24zWUjm4APIrQdY",
-    CLOUDINARY_API: "982427895672898",
+    GOOGLE_OAUTH_SECRET: "n2QcZQC_XjVPKr_3VabDj7ca",
     CLOUDINARY_UPLOAD: "https://api.cloudinary.com/v1_1/ddkclruno/image/upload",
     CLOUDINARY_PRESET: "okzkpnl4",
     NEXTAUTH_URL: "https://balidogfinder.com",
     FACEBOOK_APPID: "1433490780341675",
-    FACEBOOK_SECRET: "c95f3bb5184b57cbc21bb59bfce5e381"
+    FACEBOOK_SECRET: "c95f3bb5184b57cbc21bb59bfce5e381",
   },
   images: {
     domains: ["res.cloudinary.com"],
