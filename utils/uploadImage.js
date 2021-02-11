@@ -19,7 +19,7 @@ export default function uploadImage(initialFile, setImage, setImageLoading) {
         headers: { "X-Requested-With": "XMLHttpRequest" },
         data: {
           file: compressedFile,
-          upload_preset: process.env.CLOUDINARY_PRESET,
+          upload_preset: 'okzkpnl4',
         },
       });
     })
