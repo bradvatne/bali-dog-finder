@@ -3,7 +3,7 @@ body {
 }
 
 small {
-  font-size: .7em !important;
+  font-size: 0.7em !important;
 }
 
 /* NAVBAR */
@@ -60,7 +60,6 @@ small {
   padding: 30px 10px !important;
 }
 
-
 .navbar-custom {
   background-color: #7c3aed !important;
   -webkit-box-shadow: 0px 12px 15px -8px rgba(0, 0, 0, 0.37);
@@ -99,7 +98,6 @@ small {
 .navbar-dark .navbar-toggler {
   border: none !important;
 }
-
 
 /* Fix Mobile Nav */
 @media (max-width: 998px) {
@@ -169,7 +167,24 @@ small {
   color: #7c3aed !important;
   border: 1px solid #ced4da !important;
   margin-bottom: 10px;
-  width: 50%
+  width: 50%;
+}
+
+.input-group > label {
+  color: white !important;
+  background-color: #0088ff;
+}
+
+.input-group > label:hover {
+  color:#0088ff !important;
+  background-color: white !important;
+  cursor: pointer;
+}
+
+
+.form-control:focus {
+  border-color: rgba(124, 58, 237, 0.5) !important;
+  box-shadow: 0 0 10px #7c3aed !important;
 }
 
 .bg-facebook {
@@ -180,18 +195,14 @@ small {
   background-color: #dd4b39 !important;
 }
 
-
-
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .social-login {
-    width: 100%
+    width: 100%;
   }
-  
+
   .social-login:hover {
-    width: 100%
+    width: 100%;
   }
-
-
 }
 
 /* Popup Card */
@@ -238,7 +249,6 @@ small {
 .leaflet-control-zoom {
   display: none;
 }
-
 
 .leaflet-container {
   height: 100vh;
