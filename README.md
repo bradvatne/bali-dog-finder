@@ -19,7 +19,7 @@ Other features
   - Database: Mongo.db
   - Authentication: OAuth2 with next-auth
   - Image Hosting: Cloudinary
-  - Hosting: Vercel
+  - Deployment: Vercel
 
 ### 💾 Installation
 
