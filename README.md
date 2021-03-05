@@ -58,7 +58,7 @@ npm run dev
 Hi! 👋 I'm Brad!
 My story starts like many others. I took a break during my third year of a Computer Science degree in late 2019 and set out travelling Southeast Asia. As the pandemic began to erupt in early 2020, I decided to settle in Bali. In November of 2020 I started learning Next.js. After building a few basic projects, I felt prepared to tackle something a little more involved. Many community Facebook groups in Bali are inundated daily with multiple posts of dogs that are lost or found. Given that, I found a way to help the community and also develop my skills. 
 
-I am now building my first real web-app, I'm engaged to my wonderfully supportive fiancee with a child on the way, and hoping to be employable soon. 
+I am now building my first real web-app, I'm engaged to my wonderfully supportive fiancee and hoping to be employable soon. 
 
 My technical goals for this project were to get a feel for the development process from start to finish and gain a true understanding of the technologies used. For this reason, I limited most of my research to within their respective documentation, rather than just copy + pasting from tutorials.
 
